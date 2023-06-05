@@ -38,79 +38,68 @@ $(document).ready(function() {
 
       $(".row").empty(); // Clear existing PDF sections
 
-      if (pdfSections.length === 0) {
-        $(".row").append('<p>No results found.</p>');
-      } else {
-        $.each(pdfSections, function(index, item) {
-          var pdfId = "read" + (index + 1);
-          var pdfUrl = item.pdfUrl;
-          var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
-          var title = fileName.toUpperCase(); // Capitalize the extracted file name
-          var description = item.description;
-          var price = formatCurrency(item.price);
+      $.each(pdfSections, function(index, item) {
+        var pdfId = "read" + (index + 1);
+        var pdfUrl = item.pdfUrl;
+        var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
+        var title = fileName.toUpperCase(); // Capitalize the extracted file name
+        var description = item.description;
+        var price = formatCurrency(item.price);
 
-          var pdfSection = '<div class="col-md-4 mb-3">' +
-            '<div class="card">' +
-            '<div class="card-body">' +
-            '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
-            '<p class="description">' + description + '</p>' +
-            '<p>Price: <span class="price"><del>' + price + '</del></span><span class="free-text"> FREE</span></p>' +
-            '<div class="button">' +
-            '<a id="' + pdfId + '" class="btn btn-info mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
-            '<a class="btn btn-primary mt-2 text-white" href="' + pdfUrl + '" download>Download <i class="fas fa-download fa-lg"></i></a>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
+        var pdfSection = '<div class="col-md-4 mb-3">' +
+          '<div class="card">' +
+          '<div class="card-body">' +
+          '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
+          '<p class="description">' + description + '</p>' +
+          '<p>Price: <span class="price"><del>' + price + '</del></span><span class="free-text"> FREE</span></p>' +
+          '<div class="button">' +
+          '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
+          '<a href="' + pdfUrl + '" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
 
-          $(".row").append(pdfSection);
+        $(".row").append(pdfSection);
 
-          $("#" + pdfId).flipBook({
-            // Layout Setting
-            pdfUrl: item.pdfUrl,
-            lightBox: true,
-            layout: 3,
-            currentPage: {
-              vAlign: "bottom",
-              hAlign: "left"
-            },
-            // BTN SETTING
-            btnShare: {
-              enabled: false
-            },
-            btnPrint: {
-              enabled: false // Disable the print button
-            },
-            btnDownloadPages: {
-              enabled: false // Disable the download pages button
-            },
-            btnColor: 'rgb(255,120,60)',
-            sideBtnColor: 'rgb(255,120,60)',
-            sideBtnSize: 60,
-            sideBtnBackground: "rgba(0,0,0,.7)",
-            sideBtnRadius: 60,
-            btnSound: {
-              vAlign: "top",
-              hAlign: "left"
-            },
-            btnAutoplay: {
-              vAlign: "top",
-              hAlign: "left"
-            },
-          });
+        $("#" + pdfId).flipBook({
+          // Layout Setting
+          pdfUrl: item.pdfUrl,
+          lightBox: true,
+          layout: 3,
+          currentPage: {
+            vAlign: "bottom",
+            hAlign: "left"
+          },
+          // BTN SETTING
+          btnShare: {
+            enabled: false
+          },
+          btnPrint: {
+            enabled: false // Disable the print button
+          },
+          btnDownloadPages: {
+            enabled: false // Disable the download pages button
+          },
+          btnColor: 'rgb(255,120,60)',
+          sideBtnColor: 'rgb(255,120,60)',
+          sideBtnSize: 60,
+          sideBtnBackground: "rgba(0,0,0,.7)",
+          sideBtnRadius: 60,
+          btnSound: {
+            vAlign: "top",
+            hAlign: "left"
+          },
+          btnAutoplay: {
+            vAlign: "top",
+            hAlign: "left"
+          },
         });
-      }
+      });
     }
 
     showPage(currentPage);
-
-    // Search functionality
-    $("#searchInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $(".card").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-      });
-    });
+    
 
     function formatCurrency(amount) {
       var formatter = new Intl.NumberFormat("en-US", {
@@ -158,6 +147,8 @@ $(document).ready(function() {
     }
     updatePaginationButtons();
 
+
+    
     // Save current page to localStorage on page unload
     $(window).on("beforeunload", function() {
       localStorage.setItem("currentPage", currentPage.toString());
@@ -314,13 +305,12 @@ h3 {
     </div>
   </a>
   
+  
 </nav>
 
   <!-- Main Content -->
-  <div class="container mt-5"><br>
-    <div class="search-container">
-      <input id="searchInput" type="text" placeholder="Search this class content...">
-    </div>
+  <div class="container mt-5">
+    
     <div class="row"></div>
 
     <!-- Pagination -->
