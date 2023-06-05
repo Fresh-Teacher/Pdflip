@@ -22,126 +22,137 @@
   <script src="js/flipbook.min.js"></script>
 
   <script type="text/javascript">
- $(document).ready(function() {
-      $.getJSON("pdfData.json", function(data) {
-        var totalPages = Math.ceil(data.length / 21);
-        var currentPage = 1;
+$(document).ready(function() {
+  $.getJSON("pdfData.json", function(data) {
+    var filteredData = data.filter(function(item) {
+      return item.price > 0;
+    });
 
-        function showPage(page) {
-          var start = (page - 1) * 21;
-          var end = start + 21;
-          var pdfSections = data.slice(start, end);
+    var totalPages = Math.ceil(filteredData.length / 21);
+    var currentPage = 1;
 
-          $(".row").empty(); // Clear existing PDF sections
+    function showPage(page) {
+      var start = (page - 1) * 21;
+      var end = start + 21;
+      var pdfSections = filteredData.slice(start, end);
 
-          $.each(pdfSections, function(index, item) {
-            var pdfId = "read" + (index + 1);
-            var pdfUrl = item.pdfUrl;
-            var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
-            var title = fileName.toUpperCase(); // Capitalize the extracted file name
-            var description = item.description;
+      $(".row").empty(); // Clear existing PDF sections
 
-            var pdfSection = '<div class="col-md-4 mb-3">' +
-              '<div class="card">' +
-              '<div class="card-body">' +
-              '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
-              '<p class="description">' + description + '</p>' +
-              '<p>Price: <span class="price"><del>' + item.price + '</del></span> <span class="free-text">FREE</span></p>' +
-              '<div class="button">' +
-              '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
-              '<a href="' + pdfUrl + '" class="btn btn-success mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>' +
-              '</div>' +
-              '</div>' +
-              '</div>' +
-              '</div>';
+      $.each(pdfSections, function(index, item) {
+        var pdfId = "read" + (index + 1);
+        var pdfUrl = item.pdfUrl;
+        var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
+        var title = fileName.toUpperCase(); // Capitalize the extracted file name
+        var description = item.description;
+        var price = formatCurrency(item.price);
 
-            $(".row").append(pdfSection);
+        var pdfSection = '<div class="col-md-4 mb-3">' +
+          '<div class="card">' +
+          '<div class="card-body">' +
+          '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
+          '<p class="description">' + description + '</p>' +
+          '<p>Price: <span class="price"><del>' + price + '</del></span><span class="free-text"> FREE</span></p>' +
+          '<div class="button">' +
+          '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
+          '<a href="' + pdfUrl + '" class="btn btn-success mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
 
-            $("#" + pdfId).flipBook({
-              // Layout Setting
-              pdfUrl: item.pdfUrl,
-              lightBox: true,
-              layout: 3,
-              currentPage: {
-                vAlign: "bottom",
-                hAlign: "left"
-              },
-              // BTN SETTING
-              btnShare: {
-                enabled: false
-              },
-              btnPrint: {
-                enabled: false // Disable the print button
-              },
-              btnDownloadPages: {
-                enabled: false // Disable the download pages button
-              },
-              btnColor: 'rgb(255,120,60)',
-              sideBtnColor: 'rgb(255,120,60)',
-              sideBtnSize: 60,
-              sideBtnBackground: "rgba(0,0,0,.7)",
-              sideBtnRadius: 60,
-              btnSound: {
-                vAlign: "top",
-                hAlign: "left"
-              },
-              btnAutoplay: {
-                vAlign: "top",
-                hAlign: "left"
-              },
-            });
+        $(".row").append(pdfSection);
 
-          });
-
-          // Scroll to top of the page
-          window.scrollTo(0, 0);
-        }
-
-        showPage(currentPage);
-
-        function updatePaginationButtons() {
-          $("#pageNumbers").text("Page " + currentPage + " of " + totalPages);
-          if (currentPage === 1) {
-            $("#previousPageBtn").hide();
-          } else {
-            $("#previousPageBtn").show();
-          }
-          if (currentPage === totalPages) {
-            $("#nextPageBtn").hide();
-          } else {
-            $("#nextPageBtn").show();
-          }
-        }
-
-        $("#previousPageBtn").click(function() {
-          if (currentPage > 1) {
-            currentPage--;
-            showPage(currentPage);
-            updatePaginationButtons();
-          }
-        });
-
-        $("#nextPageBtn").click(function() {
-          if (currentPage < totalPages) {
-            currentPage++;
-            showPage(currentPage);
-            updatePaginationButtons();
-          }
-        });
-
-        // Check if page number is stored in localStorage
-        if (localStorage.getItem("currentPage")) {
-          currentPage = parseInt(localStorage.getItem("currentPage"));
-          showPage(currentPage);
-        }
-        updatePaginationButtons();
-
-        // Save current page to localStorage on page unload
-        $(window).on("beforeunload", function() {
-          localStorage.setItem("currentPage", currentPage.toString());
+        $("#" + pdfId).flipBook({
+          // Layout Setting
+          pdfUrl: item.pdfUrl,
+          lightBox: true,
+          layout: 3,
+          currentPage: {
+            vAlign: "bottom",
+            hAlign: "left"
+          },
+          // BTN SETTING
+          btnShare: {
+            enabled: false
+          },
+          btnPrint: {
+            enabled: false // Disable the print button
+          },
+          btnDownloadPages: {
+            enabled: false // Disable the download pages button
+          },
+          btnColor: 'rgb(255,120,60)',
+          sideBtnColor: 'rgb(255,120,60)',
+          sideBtnSize: 60,
+          sideBtnBackground: "rgba(0,0,0,.7)",
+          sideBtnRadius: 60,
+          btnSound: {
+            vAlign: "top",
+            hAlign: "left"
+          },
+          btnAutoplay: {
+            vAlign: "top",
+            hAlign: "left"
+          },
         });
       });
+    }
+
+    showPage(currentPage);
+
+    function formatCurrency(amount) {
+      var formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "UGX",
+        minimumFractionDigits: 0
+      });
+      return formatter.format(amount);
+    }
+
+    function updatePaginationButtons() {
+      $("#pageNumbers").text("Page " + currentPage + " of " + totalPages);
+      if (currentPage === 1) {
+        $("#previousPageBtn").hide();
+      } else {
+        $("#previousPageBtn").show();
+      }
+      if (currentPage === totalPages) {
+        $("#nextPageBtn").hide();
+      } else {
+        $("#nextPageBtn").show();
+      }
+    }
+
+    $("#previousPageBtn").click(function() {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+        updatePaginationButtons();
+      }
     });
+
+    $("#nextPageBtn").click(function() {
+      if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+        updatePaginationButtons();
+      }
+    });
+
+    // Check if page number is stored in localStorage
+    if (localStorage.getItem("currentPage")) {
+      currentPage = parseInt(localStorage.getItem("currentPage"));
+      showPage(currentPage);
+    }
+    updatePaginationButtons();
+
+    // Save current page to localStorage on page unload
+    $(window).on("beforeunload", function() {
+      localStorage.setItem("currentPage", currentPage.toString());
+    });
+  });
+});
+
   </script>
 
   <style>
@@ -160,10 +171,11 @@
   background-color: #fff;
 }
 
-.free-price {
+.price {
       color: red;
       text-decoration: line-through;
     }
+
     .free-text {
       color: green;
     }
@@ -301,9 +313,9 @@ h3 {
 
     <!-- Pagination -->
     <div class="pagination-container">
-      <div id="previousPageBtn" class="pagination-button"><i class="fas fa-chevron-left"></i> Previous</div>
+      <div id="previousPageBtn" class="pagination-button"><i class="fas fa-chevron-left"></i> Previous Page</div>
       <div id="pageNumbers" class="mx-4"></div>
-      <div id="nextPageBtn" class="pagination-button">Next <i class="fas fa-chevron-right"></i></div>
+      <div id="nextPageBtn" class="pagination-button">Next Page <i class="fas fa-chevron-right"></i></div>
     </div>
   </div>
 
