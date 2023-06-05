@@ -206,3 +206,144 @@
 </body>
 
 </html>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="shortcut icon" href="images/KPK_Logo.svg">
+  <title>View PDF</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- AJAX -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+  <!-- Costume CSS -->
+  <link rel="stylesheet" type="text/css" href="css/flipbook.style.css">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="css/footer.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <!-- Include JS -->
+  <script src="js/flipbook.min.js"></script>
+
+  <script type="text/javascript">
+
+  $(document).ready(function() {
+  $.getJSON("pdfData.json", function(data) {
+    var filteredData = data.filter(function(item) {
+      return item.price > 0;
+    });
+
+    var totalPages = Math.ceil(filteredData.length / 21);
+    var currentPage = 1;
+
+    function showPage(page) {
+      var start = (page - 1) * 21;
+      var end = start + 21;
+      var pdfSections = filteredData.slice(start, end);
+
+      $(".row").empty(); // Clear existing PDF sections
+
+      if (pdfSections.length === 0) {
+        $(".row").append('<p>No results found.</p>');
+      } else {
+        $.each(pdfSections, function(index, item) {
+          var pdfId = "read" + (index + 1);
+          var pdfUrl = item.pdfUrl;
+          var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
+          var title = fileName.toUpperCase(); // Capitalize the extracted file name
+          var description = item.description;
+          var price = formatCurrency(item.price);
+
+          var pdfSection = '<div class="col-md-4 mb-3">' +
+            '<div class="card">' +
+            '<div class="card-body">' +
+            '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
+            '<p class="description">' + description + '</p>' +
+            '<p>Price: <span class="price"><del>' + price + '</del></span><span class="free-text"> FREE</span></p>' +
+            '<div class="button">' +
+            '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
+            '<a class="btn btn-secondary mt-2 text-white" href="' + pdfUrl + '" download>Download <i class="fas fa-download fa-lg"></i></a>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+          $(".row").append(pdfSection);
+        });
+      }
+    }
+
+    showPage(currentPage);
+
+    // Pagination
+    $("#prevPage").on("click", function() {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+
+    $("#nextPage").on("click", function() {
+      if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+
+    // Format currency
+    function formatCurrency(value) {
+      return "$" + value.toFixed(2);
+    }
+
+    // Search functionality
+    $("#searchInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      var filteredItems = filteredData.filter(function(item) {
+        var title = item.title.toLowerCase();
+        var description = item.description.toLowerCase();
+        return title.includes(value) || description.includes(value);
+      });
+
+      currentPage = 1;
+      totalPages = Math.ceil(filteredItems.length / 21);
+      showPage(currentPage);
+
+      // Update pagination buttons
+      $("#prevPage").prop("disabled", currentPage === 1);
+      $("#nextPage").prop("disabled", currentPage === totalPages);
+    });
+  });
+});
+
+</script>
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">View PDF</a>
+    <div class="search-container">
+      <input id="searchInput" type="text" placeholder="Search...">
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row mt-3">
+    </div>
+
+    <!-- Pagination -->
+<div class="pagination-container">
+  <button id="prevPage" class="btn btn-primary mr-2" disabled><i class="fas fa-arrow-left"></i> Prev</button>
+  <button id="nextPage" class="btn btn-primary">Next <i class="fas fa-arrow-right"></i></button>
+</div>
+
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rPqtxmU61/LYYo3KFkr5MQbe5j5qF2kTvR8UKLX+K7gTVVE5Gz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAKl8WvW5K86Jg2f" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
