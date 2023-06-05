@@ -22,37 +22,40 @@
   <script src="js/flipbook.min.js"></script>
 
   <script type="text/javascript">
-$(document).ready(function() {
-  $.getJSON("pdfData.json", function(data) {
-    var totalPages = Math.ceil(data.length / 21);
-    var currentPage = 1;
+ $(document).ready(function() {
+      $.getJSON("pdfData.json", function(data) {
+        var totalPages = Math.ceil(data.length / 21);
+        var currentPage = 1;
 
-    function showPage(page) {
-      var start = (page - 1) * 21;
-      var end = start + 21;
-      var pdfSections = data.slice(start, end);
+        function showPage(page) {
+          var start = (page - 1) * 21;
+          var end = start + 21;
+          var pdfSections = data.slice(start, end);
 
-      $(".row").empty(); // Clear existing PDF sections
+          $(".row").empty(); // Clear existing PDF sections
 
-      $.each(pdfSections, function(index, item) {
-        var pdfId = "read" + (index + 1);
-        var pdfUrl = item.pdfUrl;
-        var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
-        var title = fileName.toUpperCase(); // Capitalize the extracted file name
+          $.each(pdfSections, function(index, item) {
+            var pdfId = "read" + (index + 1);
+            var pdfUrl = item.pdfUrl;
+            var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
+            var title = fileName.toUpperCase(); // Capitalize the extracted file name
+            var description = item.description;
 
-        var pdfSection = '<div class="col-md-4 mb-3">' +
-          '<div class="card">' +
-          '<div class="card-body">' +
-          '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
-          '<div class="button">' +
-          '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
-          '<a href="' + pdfUrl + '" class="btn btn-success mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>' +
-          '</div>' +
-          '</div>' +
-          '</div>' +
-          '</div>';
+            var pdfSection = '<div class="col-md-4 mb-3">' +
+              '<div class="card">' +
+              '<div class="card-body">' +
+              '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
+              '<p class="description">' + description + '</p>' +
+              '<p>Price: <span class="price"><del>' + item.price + '</del></span> <span class="free-text">FREE</span></p>' +
+              '<div class="button">' +
+              '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
+              '<a href="' + pdfUrl + '" class="btn btn-success mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>' +
+              '</div>' +
+              '</div>' +
+              '</div>' +
+              '</div>';
 
-        $(".row").append(pdfSection);
+            $(".row").append(pdfSection);
 
             $("#" + pdfId).flipBook({
               // Layout Setting
@@ -156,6 +159,14 @@ $(document).ready(function() {
   padding: 10px 20px 20px; /* Add bottom padding */
   background-color: #fff;
 }
+
+.free-price {
+      color: red;
+      text-decoration: line-through;
+    }
+    .free-text {
+      color: green;
+    }
 
 .logo-container {
   display: flex;
