@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
   <link rel="shortcut icon" href="images/KPK_Logo.svg">
   <title>View PDF</title>
   <!-- Required meta tags -->
@@ -23,92 +23,144 @@
 
   <script type="text/javascript">
 
-      $(document).ready(function () {
-          $("#read").flipBook({
-            //Layout Setting
-            pdfUrl:'pdf/pdf.pdf',
-            lightBox:true,
-            layout:3,
-            currentPage:{vAlign:"bottom", hAlign:"left"},
-            // BTN SETTING
-            btnShare : {enabled:false},
-            btnPrint : {
-              hideOnMobile:true
-            },
-            btnDownloadPages : {
-              enabled: true,
-              title: "Download pages",
-              icon: "fa-download",
-              icon2: "file_download",
-              url: "images/pdf.rar",
-              name: "allPages.zip",
-              hideOnMobile:false
-            },
-            btnColor:'rgb(255,120,60)',
-            sideBtnColor:'rgb(255,120,60)',
-            sideBtnSize:60,
-            sideBtnBackground:"rgba(0,0,0,.7)",
-            sideBtnRadius:60,
-            btnSound:{vAlign:"top", hAlign:"left"},
-            btnAutoplay:{vAlign:"top", hAlign:"left"},
-            // SHARING
-            btnShare : {
-              enabled: true,
-              title: "Share",
-              icon: "fa-share-alt"
-            },
-            facebook : {
-              enabled: true,
-              url: "ismanyan.github.io/Pdf_flipbook.demo.github.io/pdf/pdf.pdf"
-            },
-            google_plus : {
-              enabled: false
-            },
-            email : {
-              enabled: true,
-              url: "https://ismanyan.github.io/Pdf_flipbook.demo.github.io/pdf/pdf.pdf",
-              title: "PDF KPK",
-              description: "Silahkan click link di bawah untuk melihat / mengunduf pdf"
-            },
-            twitter : {
-              enabled: true,
-              url: "https://ismanyan.github.io/Pdf_flipbook.demo.github.io/pdf/pdf.pdf"
-            },
-            pinterest : {
-            enabled: true,
-            url: "https://ismanyan.github.io/Pdf_flipbook.demo.github.io/pdf/pdf.pdf"
-            }
-        });
-      })
+    $(document).ready(function() {
+      $("#read1").flipBook({
+        //Layout Setting
+        pdfUrl: 'https://freshteacher.software/2019 PLE Science Past Paper.pdf',
+        lightBox: true,
+        layout: 3,
+        currentPage: {
+          vAlign: "bottom",
+          hAlign: "left"
+        },
+        
+        // BTN SETTING
+        btnShare: {
+          enabled: false
+        },
+        btnPrint: {
+          hideOnMobile: true
+        },
+        btnDownloadPages: {
+          enabled: true,
+          title: "Download pages",
+          icon: "fa-download",
+          icon2: "file_download",
+          url: "images/pdf.rar",
+          name: "allPages.zip",
+          hideOnMobile: false
+        },
+        btnColor: 'rgb(255,120,60)',
+        sideBtnColor: 'rgb(255,120,60)',
+        sideBtnSize: 60,
+        sideBtnBackground: "rgba(0,0,0,.7)",
+        sideBtnRadius: 60,
+        btnSound: {
+          vAlign: "top",
+          hAlign: "left"
+        },
+        btnAutoplay: {
+          vAlign: "top",
+          hAlign: "left"
+        },
+      });$("#read2").flipBook({
+        //Layout Setting
+        pdfUrl: 'https://freshteacher.software/2022 - PRE-PLE SERIES I SST FRESH.pdf',
+        lightBox: true,
+        layout: 3,
+        currentPage: {
+          vAlign: "bottom",
+          hAlign: "left"
+        },
+        
+        // BTN SETTING
+        btnShare: {
+          enabled: false
+        },
+        btnPrint: {
+          hideOnMobile: true
+        },
+        btnDownloadPages: {
+          enabled: true,
+          title: "Download pages",
+          icon: "fa-download",
+          icon2: "file_download",
+          url: "images/pdf.rar",
+          name: "allPages.zip",
+          hideOnMobile: false
+        },
+        btnColor: 'rgb(255,120,60)',
+        sideBtnColor: 'rgb(255,120,60)',
+        sideBtnSize: 60,
+        sideBtnBackground: "rgba(0,0,0,.7)",
+        sideBtnRadius: 60,
+        btnSound: {
+          vAlign: "top",
+          hAlign: "left"
+        },
+        btnAutoplay: {
+          vAlign: "top",
+          hAlign: "left"
+        },
+      });$("#read3").flipBook({
+        //Layout Setting
+        pdfUrl: 'https://freshteacher.software/BOT III P7 ENG.pdf',
+        lightBox: true,
+        layout: 3,
+        currentPage: {
+          vAlign: "bottom",
+          hAlign: "left"
+        },
+        
+        // BTN SETTING
+        btnShare: {
+          enabled: false
+        },
+        btnPrint: {
+          hideOnMobile: true
+        },
+        btnDownloadPages: {
+          enabled: true,
+          title: "Download pages",
+          icon: "fa-download",
+          icon2: "file_download",
+          url: "images/pdf.rar",
+          name: "allPages.zip",
+          hideOnMobile: false
+        },
+        btnColor: 'rgb(255,120,60)',
+        sideBtnColor: 'rgb(255,120,60)',
+        sideBtnSize: 60,
+        sideBtnBackground: "rgba(0,0,0,.7)",
+        sideBtnRadius: 60,
+        btnSound: {
+          vAlign: "top",
+          hAlign: "left"
+        },
+        btnAutoplay: {
+          vAlign: "top",
+          hAlign: "left"
+        },
+      });
+    })
   </script>
 
   <style>
     body {
       background-color: #f6f6f6;
     }
-    #author {
-      font-size: 15px;
-      font-weight: bold;
-      color: #0186c9;
-    }
-    #date {
-      margin-left: 10px;
-      font-size: 15px;
-      color: #819196;
-    }
+
+
     #size {
       font-size: 15px;
       color: #819196;
     }
-    #description {
-      margin-top: 20px;
-      font-weight: lighter;
-    }
+
   </style>
 
-  </head>
+</head>
 
-  <body>
+<body>
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
@@ -124,32 +176,51 @@
     <div class="container">
       <div class="card shadow">
         <div class="row">
+          <!-- PDF 1 -->
           <div class="col-md-3">
-            <!-- <img src="images/book2/7.jpg" class="w-100 book-1"> -->
           </div>
           <div class="col-md-7 mt-3">
-            <!-- Info -->
-            <h3 id="title">P.7 English Lesson Notes</h3>
-            <!-- Button -->
+            <h3 id="title1">P.7 English Lesson Notes</h3>
             <div class="button">
-              <a id="read" class="btn btn-primary mt-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
-              <a href="pdf/pdf.pdf" class="btn btn-primary mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
+              <a id="read1" class="btn btn-primary mt-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
+              <a href="https://freshteacher.software/2019 PLE Science Past Paper.pdf" class="btn btn-primary mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
             </div>
-            <!-- Description -->
           </div>
+          
+          <!-- PDF 2 -->
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-7 mt-3">
+            <h3 id="title2">P.7 Mathematics Lesson Notes</h3>
+            <div class="button">
+              <a id="read2" class="btn btn-primary mt-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
+              <a href="https://freshteacher.software/2022 - PRE-PLE SERIES I SST FRESH.pdf" class="btn btn-primary mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
+            </div>
+          </div>
+          
+          <!-- PDF 3 -->
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-7 mt-3">
+            <h3 id="title3">P.7 Science Lesson Notes</h3>
+            <div class="button">
+              <a id="read3" class="btn btn-primary mt-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
+              <a href="https://freshteacher.software/BOT III P7 ENG.pdf" class="btn btn-primary mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
+            </div>
+          </div>
+          
+          <!-- Add more PDF sections as needed -->
         </div>
       </div>
     </div>
   </section>
+  
   <!-- END OF PDF INFORMATION -->
 
-  
-
-  <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-  </body>
+</body>
 
 </html>
