@@ -145,10 +145,8 @@ $(document).ready(function () {
       }
     }
 
-    // Add event listener to search input with debounce
-    $("#searchInput").on("input", handleSearchInput);
 
-    $("#prevPageButton").on("click", function () {
+    $("#previousPageBtn").on("click", function () {
       if (currentPage > 1) {
         currentPage--;
         displayCurrentPageItems();
@@ -156,7 +154,7 @@ $(document).ready(function () {
       }
     });
 
-    $("#nextPageButton").on("click", function () {
+    $("#nextPageBtn").on("click", function () {
       if (currentPage < totalPages) {
         currentPage++;
         displayCurrentPageItems();
