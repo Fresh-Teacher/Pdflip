@@ -15,271 +15,342 @@
   <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="css/footer.css">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
   <!-- Include JS -->
   <script src="js/flipbook.min.js"></script>
 
   <script type="text/javascript">
- $(document).ready(function() {
-      $.getJSON("pdfData.json", function(data) {
-        var totalPages = Math.ceil(data.length / 21);
-        var currentPage = 1;
+$(document).ready(function () {
+  var searchTimer; // Move the declaration outside the showPage function
 
-        function showPage(page) {
-          var start = (page - 1) * 21;
-          var end = start + 21;
-          var pdfSections = data.slice(start, end);
+  $.getJSON("pdfData.json", function (data) {
+    var totalPages = Math.ceil(data.length / 21);
+    var currentPage = 1;
 
-          $(".row").empty(); // Clear existing PDF sections
+    function showPage(page, filteredData) { // Add filteredData as a parameter
+      var start = (page - 1) * 21;
+      var end = start + 21;
+      var pdfSections;
 
-          $.each(pdfSections, function(index, item) {
-            var pdfId = "read" + (index + 1);
-            var pdfUrl = item.pdfUrl;
-            var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
-            var title = fileName.toUpperCase(); // Capitalize the extracted file name
-            var description = item.description;
+      if (filteredData) {
+        pdfSections = filteredData.slice(start, end);
+      } else {
+        pdfSections = data.slice(start, end);
+      }
 
-            var pdfSection = '<div class="col-md-4 mb-3">' +
-              '<div class="card">' +
-              '<div class="card-body">' +
-              '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
-              '<p class="description">' + description + '</p>' +
-              '<p>Price: <span class="price"><del>' + item.price + '</del></span> <span class="free-text">FREE</span></p>' +
-              '<div class="button">' +
-              '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
-              '<a href="' + pdfUrl + '" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>' +
-              '</div>' +
-              '</div>' +
-              '</div>' +
-              '</div>';
+      $(".row").empty(); // Clear existing PDF sections
 
-            $(".row").append(pdfSection);
+      $.each(pdfSections, function (index, item) {
+        var pdfId = "read" + (index + 1);
+        var pdfUrl = item.pdfUrl;
+        var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
+        var title = fileName.toUpperCase(); // Capitalize the extracted file name
+        var description = item.description;
+        var price = formatCurrency(item.price);
 
-            $("#" + pdfId).flipBook({
-              // Layout Setting
-              pdfUrl: item.pdfUrl,
-              lightBox: true,
-              layout: 3,
-              currentPage: {
-                vAlign: "bottom",
-                hAlign: "left"
-              },
-              // BTN SETTING
-              btnShare: {
-                enabled: false
-              },
-              btnPrint: {
-                enabled: false // Disable the print button
-              },
-              btnDownloadPages: {
-                enabled: false // Disable the download pages button
-              },
-              btnColor: 'rgb(255,120,60)',
-              sideBtnColor: 'rgb(255,120,60)',
-              sideBtnSize: 60,
-              sideBtnBackground: "rgba(0,0,0,.7)",
-              sideBtnRadius: 60,
-              btnSound: {
-                vAlign: "top",
-                hAlign: "left"
-              },
-              btnAutoplay: {
-                vAlign: "top",
-                hAlign: "left"
-              },
+        var pdfSection = '<div class="col-md-4 mb-3">' +
+          '<div class="card">' +
+          '<div class="card-body">' +
+          '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
+          '<p class="description">' + description + '</p>' +
+          '<p>Price: <span class="price"><del>' + item.price + '</del></span> <span class="free-text">FREE</span></p>' +
+          '<div class="button">' +
+          '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
+          '<a href="' + pdfUrl + '" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
+
+        $(".row").append(pdfSection);
+
+        $("#" + pdfId).flipBook({
+          // Layout Setting
+          pdfUrl: item.pdfUrl,
+          lightBox: true,
+          layout: 3,
+          currentPage: {
+            vAlign: "bottom",
+            hAlign: "left"
+          },
+          // BTN SETTING
+          btnShare: {
+            enabled: false
+          },
+          btnPrint: {
+            enabled: false // Disable the print button
+          },
+          btnDownloadPages: {
+            enabled: false // Disable the download pages button
+          },
+          btnColor: 'rgb(255,120,60)',
+          sideBtnColor: 'rgb(255,120,60)',
+          sideBtnSize: 60,
+          sideBtnBackground: "rgba(0,0,0,.7)",
+          sideBtnRadius: 60,
+          btnSound: {
+            vAlign: "top",
+            hAlign: "left"
+          },
+          btnAutoplay: {
+            vAlign: "top",
+            hAlign: "left"
+          },
+        });
+
+      });
+
+      // Scroll to top of the page
+      window.scrollTo(0, 0);
+    }
+
+    function updatePaginationButtons() {
+      $("#pageNumbers").text("Page " + currentPage + " of " + totalPages);
+      if (currentPage === 1) {
+        $("#previousPageBtn").hide();
+      } else {
+        $("#previousPageBtn").show();
+      }
+      if (currentPage === totalPages) {
+        $("#nextPageBtn").hide();
+      } else {
+        $("#nextPageBtn").show();
+      }
+    }
+
+    $("#searchInput").on("input", function () {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function () {
+        var searchTerm = $("#searchInput").val().toLowerCase();
+        var filteredData = data.filter(function (item) {
+          return item.description.toLowerCase().includes(searchTerm);
+        });
+        totalPages = Math.ceil(filteredData.length / 21);
+        currentPage = 1;
+        showPage(currentPage, filteredData);
+        updatePaginationButtons();
+      }, 500);
+    });
+
+    $("#previousPageBtn").click(function () {
+      currentPage--;
+      showPage(currentPage);
+      updatePaginationButtons();
+    });
+
+    $("#nextPageBtn").click(function () {
+      currentPage++;
+      showPage(currentPage);
+      updatePaginationButtons();
+    });
+
+    showPage(currentPage);
+    updatePaginationButtons();
+  });
+});
+
+
+            function updatePaginationButtons() {
+              $("#pageNumbers").text("Page " + currentPage + " of " + totalPages);
+              if (currentPage === 1) {
+                $("#previousPageBtn").hide();
+              } else {
+                $("#previousPageBtn").show();
+              }
+              if (currentPage === totalPages) {
+                $("#nextPageBtn").hide();
+              } else {
+                $("#nextPageBtn").show();
+              }
+            }
+
+            $("#previousPageBtn").click(function () {
+              if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+                updatePaginationButtons();
+              }
             });
 
-          });
+            $("#nextPageBtn").click(function () {
+              if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+                updatePaginationButtons();
+              }
+            });
 
-          // Scroll to top of the page
-          window.scrollTo(0, 0);
-        }
-
-        showPage(currentPage);
-
-        function updatePaginationButtons() {
-          $("#pageNumbers").text("Page " + currentPage + " of " + totalPages);
-          if (currentPage === 1) {
-            $("#previousPageBtn").hide();
-          } else {
-            $("#previousPageBtn").show();
-          }
-          if (currentPage === totalPages) {
-            $("#nextPageBtn").hide();
-          } else {
-            $("#nextPageBtn").show();
-          }
-        }
-
-        $("#previousPageBtn").click(function() {
-          if (currentPage > 1) {
-            currentPage--;
-            showPage(currentPage);
+            // Check if page number is stored in localStorage
+            if (localStorage.getItem("currentPage")) {
+              currentPage = parseInt(localStorage.getItem("currentPage"));
+              showPage(currentPage);
+            }
             updatePaginationButtons();
-          }
-        });
 
-        $("#nextPageBtn").click(function() {
-          if (currentPage < totalPages) {
-            currentPage++;
-            showPage(currentPage);
-            updatePaginationButtons();
-          }
-        });
-
-        // Check if page number is stored in localStorage
-        if (localStorage.getItem("currentPage")) {
-          currentPage = parseInt(localStorage.getItem("currentPage"));
-          showPage(currentPage);
-        }
-        updatePaginationButtons();
-
-        // Save current page to localStorage on page unload
-        $(window).on("beforeunload", function() {
-          localStorage.setItem("currentPage", currentPage.toString());
-        });
-      });
-    });
+            // Save current page to localStorage on page unload
+            $(window).on("beforeunload", function () {
+              localStorage.setItem("currentPage", currentPage.toString());
+            });
+          
   </script>
 
   <style>
- body {
-  background-color: #f6f6f6;
-}
+    body {
+      background-color: #f6f6f6;
+    }
 
-.fa-file {
-  display: none;
-}
+    .search-bar {
+      margin-bottom: 20px;
+    }
 
-/* Navbar */
-.navbar {
-  height: 60px; /* Adjust the height as needed */
-  padding: 10px 20px 20px; /* Add bottom padding */
-  background-color: #fff;
-}
+    .search-input {
+      width: 300px;
+      padding: 6px;
+    }
 
-.free-price {
+    .fa-file {
+      display: none;
+    }
+
+    /* Navbar */
+    .navbar {
+      height: 60px;
+      /* Adjust the height as needed */
+      padding: 10px 20px 20px;
+      /* Add bottom padding */
+      background-color: #fff;
+    }
+
+    .free-price {
       color: red;
       text-decoration: line-through;
     }
+
     .free-text {
       color: green;
     }
-    .logo-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
 
-.price {
+    .logo-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .price {
       color: red;
       text-decoration: line-through;
     }
 
 
-.logo {
-  display: flex;
-  align-items: center;
-}
+    .logo {
+      display: flex;
+      align-items: center;
+    }
 
-.row {
-  padding-top: 30px; /* Adjust the value as needed */
-}
+    .row {
+      padding-top: 30px;
+      /* Adjust the value as needed */
+    }
 
-.logo-image {
-  height: 40px;
-  width: auto;
-  margin-right: 5px;
-}
+    .logo-image {
+      height: 40px;
+      width: auto;
+      margin-right: 5px;
+    }
 
-.title {
-  font-weight: bold;
-  font-size: 18px;
-  margin-right: 10px;
-}
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-right: 10px;
+    }
 
-.motto {
-  font-size: 14px;
-  font-style: italic;
-}
+    .motto {
+      font-size: 14px;
+      font-style: italic;
+    }
 
-.logo-image {
-  height: 40px;
-  width: auto;
-  margin-right: 10px; /* Adjust the margin as needed */
-}
+    .logo-image {
+      height: 40px;
+      width: auto;
+      margin-right: 10px;
+      /* Adjust the margin as needed */
+    }
 
-.title {
-  font-weight: bold;
-  font-size: 18px;
-}
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+    }
 
-.motto {
-  font-size: 14px;
-  font-style: italic;
-}
+    .motto {
+      font-size: 14px;
+      font-style: italic;
+    }
 
-/* PDF Information Section */
-.info {
-  margin-top: 100px;
-}
+    /* PDF Information Section */
+    .info {
+      margin-top: 100px;
+    }
 
-.card {
-  border: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+    .card {
+      border: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-.card-body {
-  text-transform: capitalize;
-  padding: 20px;
-}
+    .card-body {
+      text-transform: capitalize;
+      padding: 10px;
+    }
 
-h3 {
-  text-transform: capitalize;
-  font-size: 18px;
-  font-weight: bold;
-}
+    h3 {
+      text-transform: capitalize;
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-.button {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+    .button {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-/* Pagination */
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
+    /* Pagination */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
 
-.pagination-button {
-  display: inline-block;
-  padding: 8px 16px;
-  border: 1px solid #ccc;
-  background-color: rgb(0, 47, 255);
-  cursor: pointer;
-}
+    .pagination-button {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid #ccc;
+      background-color: rgb(0, 47, 255);
+      cursor: pointer;
+    }
 
-.pagination-button:hover {
-  background-color: #00e5ff;
-}
+    .pagination-button:hover {
+      background-color: #00e5ff;
+    }
 
-.pagination-text {
-  margin: 0 10px;
-}
+    .pagination-text {
+      margin: 0 10px;
+    }
 
-/* Styling for the footer */
-.footer {
-    background-color: #525354;
-        color: #ffffff;
+    /* Styling for the footer */
+    .footer {
+      background-color: #525354;
+      color: #ffffff;
 
-      padding: 0.5rem 0; /* Decreased padding for the top and bottom */
+      padding: 0.5rem 0;
+      /* Decreased padding for the top and bottom */
       text-align: center;
-      margin-top: 2rem; /* Added margin between footer and pagination buttons */
+      margin-top: 2rem;
+      /* Added margin between footer and pagination buttons */
     }
 
     .footer a {
@@ -290,56 +361,65 @@ h3 {
     .footer a:hover {
       text-decoration: underline;
     }
-
-
-
   </style>
 </head>
 
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
-  <a class="navbar-brand" href="index.html">
-       <!-- Logo Title and Motto -->
-  <div class="logo-container">
-    <div class="logo">
-      <img src="images/logo.png" alt="Logo" class="logo-image">
-    </div>
-    <div>
-      <div class="title">FRESH TEACHERS' LIBRARY</div>
-      <div class="motto">Learn. Unlearn. Relearn</div>
-    </div>
-  </div>
-  </a>  
-</nav>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+    <a class="navbar-brand" href="index.html">
+      <!-- Logo Title and Motto -->
+      <div class="logo-container">
+        <div class="logo">
+          <img src="images/logo.png" alt="Logo" class="logo-image">
+        </div>
+        <div>
+          <div class="title">FRESH TEACHERS' LIBRARY</div>
+          <div class="motto">Learn. Unlearn. Relearn</div>
+        </div>
+      </div>
+    </a>
+  </nav>
 
   <!-- Main Content -->
   <div class="container mt-5">
-    <div class="row"></div>
+    <!-- Search Bar -->
+    <div class="container mt-5"><br>
+      <div class="search-bar">
+        <input type="text" id="searchInput" class="search-input form-control" placeholder="Search for content...">
+      </div>
 
-    <!-- Pagination -->
-    <div class="pagination-container">
-      <div id="previousPageBtn" class="pagination-button"><i class="fas fa-chevron-left"></i> Previous</div>
-      <div id="pageNumbers" class="mx-4"></div>
-      <div id="nextPageBtn" class="pagination-button">Next <i class="fas fa-chevron-right"></i></div>
+      <div class="row"></div>
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+        <div id="previousPageBtn" class="pagination-button"><i class="fas fa-chevron-left"></i> Previous</div>
+        <div id="pageNumbers" class="mx-4"></div>
+        <div id="nextPageBtn" class="pagination-button">Next <i class="fas fa-chevron-right"></i></div>
+      </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>        Coded with <span style="color: red;">❦</span> by Fresh Teacher        <br>
-        &copy; Fresh Teacher Software <span id="currentYear"> </span><br>
-        <a href="tel:+256750687790">0750687790</a> / <a href="tel:+256786812837">0786812837</a>
-      </p>
-    </div>
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p> Coded with <span style="color: red;">❦</span> by Fresh Teacher <br>
+          &copy; Fresh Teacher Software <span id="currentYear"> </span><br>
+          <a href="tel:+256750687790">0750687790</a> / <a href="tel:+256786812837">0786812837</a>
+        </p>
+      </div>
+    </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7f8qz66b3Q5yT00E7Ga4Z+B/MxXQ5j+2U4Bqk4By9pFqwnq0v" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpA4KE7taVg8y6g6KbfsC5oSiFlocg8zoJsgm6nH7o5gKk5FbPE6PU6I+e" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nUw7p0azet+frh5MWLcD85v" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7f8qz66b3Q5yT00E7Ga4Z+B/MxXQ5j+2U4Bqk4By9pFqwnq0v"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpA4KE7taVg8y6g6KbfsC5oSiFlocg8zoJsgm6nH7o5gKk5FbPE6PU6I+e"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nUw7p0azet+frh5MWLcD85v"
+      crossorigin="anonymous"></script>
 </body>
 
 </html>
