@@ -1,15 +1,269 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    /* Add your custom styles here */
 
-    /* Styling for the search bar */
-    .search-bar {
-      margin-bottom: 20px;
+<head>
+  <link rel="shortcut icon" href="images/KPK_Logo.svg">
+  <title>View PDF</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- AJAX -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+  <!-- Costume CSS -->
+  <link rel="stylesheet" type="text/css" href="css/flipbook.style.css">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="css/footer.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <!-- Include JS -->
+  <script src="js/flipbook.min.js"></script>
+
+  <script type="text/javascript">
+$(document).ready(function() {
+  $.getJSON("pdfData.json", function(data) {
+    var filteredData = data.filter(function(item) {
+      return item.price > 0;
+    });
+
+    var totalPages = Math.ceil(filteredData.length / 21);
+    var currentPage = 1;
+
+    function showPage(page) {
+      var start = (page - 1) * 21;
+      var end = start + 21;
+      var pdfSections = filteredData.slice(start, end);
+
+      $(".row").empty(); // Clear existing PDF sections
+
+      $.each(pdfSections, function(index, item) {
+        var pdfId = "read" + (index + 1);
+        var pdfUrl = item.pdfUrl;
+        var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
+        var title = fileName.toUpperCase(); // Capitalize the extracted file name
+        var description = item.description;
+        var price = formatCurrency(item.price);
+
+        var pdfSection = '<div class="col-md-4 mb-3">' +
+          '<div class="card">' +
+          '<div class="card-body">' +
+          '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
+          '<p class="description">' + description + '</p>' +
+          '<p>Price: <span class="price"><del>' + price + '</del></span><span class="free-text"> FREE</span></p>' +
+          '<div class="button">' +
+          '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
+          '<a href="' + pdfUrl + '" class="btn btn-success mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
+
+        $(".row").append(pdfSection);
+
+        $("#" + pdfId).flipBook({
+          // Layout Setting
+          pdfUrl: item.pdfUrl,
+          lightBox: true,
+          layout: 3,
+          currentPage: {
+            vAlign: "bottom",
+            hAlign: "left"
+          },
+          // BTN SETTING
+          btnShare: {
+            enabled: false
+          },
+          btnPrint: {
+            enabled: false // Disable the print button
+          },
+          btnDownloadPages: {
+            enabled: false // Disable the download pages button
+          },
+          btnColor: 'rgb(255,120,60)',
+          sideBtnColor: 'rgb(255,120,60)',
+          sideBtnSize: 60,
+          sideBtnBackground: "rgba(0,0,0,.7)",
+          sideBtnRadius: 60,
+          btnSound: {
+            vAlign: "top",
+            hAlign: "left"
+          },
+          btnAutoplay: {
+            vAlign: "top",
+            hAlign: "left"
+          },
+        });
+      });
     }
+
+    showPage(currentPage);
+
+    function formatCurrency(amount) {
+      var formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "UGX",
+        minimumFractionDigits: 0
+      });
+      return formatter.format(amount);
+    }
+
+    function updatePaginationButtons() {
+      $("#pageNumbers").text("Page " + currentPage + " of " + totalPages);
+      if (currentPage === 1) {
+        $("#previousPageBtn").hide();
+      } else {
+        $("#previousPageBtn").show();
+      }
+      if (currentPage === totalPages) {
+        $("#nextPageBtn").hide();
+      } else {
+        $("#nextPageBtn").show();
+      }
+    }
+
+    $("#previousPageBtn").click(function() {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+        updatePaginationButtons();
+      }
+    });
+
+    $("#nextPageBtn").click(function() {
+      if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+        updatePaginationButtons();
+      }
+    });
+
+    // Check if page number is stored in localStorage
+    if (localStorage.getItem("currentPage")) {
+      currentPage = parseInt(localStorage.getItem("currentPage"));
+      showPage(currentPage);
+    }
+    updatePaginationButtons();
+
+    // Save current page to localStorage on page unload
+    $(window).on("beforeunload", function() {
+      localStorage.setItem("currentPage", currentPage.toString());
+    });
+  });
+});
+
+  </script>
+
+  <style>
+ body {
+  background-color: #f6f6f6;
+}
+
+.fa-file {
+  display: none;
+}
+
+/* Navbar */
+.navbar {
+  height: 60px; /* Adjust the height as needed */
+  padding: 10px 20px 20px; /* Add bottom padding */
+  background-color: #fff;
+}
+
+.price {
+      color: red;
+      text-decoration: line-through;
+    }
+
+    .free-text {
+      color: green;
+    }
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap; /* Add this line */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.row {
+  padding-top: 30px; /* Adjust the value as needed */
+}
+
+.logo-image {
+  height: 40px;
+  width: auto;
+  margin-right: 5px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.motto {
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* PDF Information Section */
+.info {
+  margin-top: 100px;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  text-transform: capitalize;
+  padding: 20px;
+}
+
+h3 {
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Pagination */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background-color: rgb(0, 47, 255);
+  cursor: pointer;
+}
+
+.pagination-button:hover {
+  background-color: #00e5ff;
+}
+
+.pagination-text {
+  margin: 0 10px;
+}
+
 /* Styling for the footer */
 .footer {
     background-color: #525354;
@@ -29,1378 +283,56 @@
       text-decoration: underline;
     }
 
-     /* Styling for the floating WhatsApp button */
-     .floating-whatsapp {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
-      padding: 10px;
-    }
 
-    /* Styling for the app bar */
-    .navbar {
-      width: 100%;
-      background-color: #f8f9fa;
-      padding: 0.5rem 0;  /* Decreased padding for the top and bottom */
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-    .navbar-brand {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: inherit;
-    }
 
-    .navbar-brand img {
-      height: 30px;
-      margin-right: 10px;
-    }
-
-    
-   
   </style>
 </head>
+
 <body>
-  <nav class="navbar">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="logo.jpg" alt="Logo">
-        <b>FRESH TEACHERS' APP</b>
-      </a>
-      <p class="text-center"><strong><em>Learn. Unlearn. Relearn</em></strong></p>
-    </div>
-  </nav>
 
-  <div class="container">
-    <!-- Search bar -->
-    <div class="search-bar">
-      <input type="text" id="searchInput" class="form-control" placeholder="Search items...">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+  <a class="navbar-brand" href="index.html">
+    <div class="logo-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" class="logo-image">
+        <div class="title">Fresh Teacher's Library</div>
+      </div>
+      <div class="motto">Learn. Unlearn. Relearn</div>
     </div>
+  </a>
+</nav>
 
-    <!-- Item cards -->
-    <div class="row" id="itemContainer">
-      <!-- Items will be dynamically populated here -->
-    </div>
 
-    <!-- Pagination buttons -->
-    <div class="d-flex justify-content-center mt-4">
-      <button id="prevPageButton" class="btn btn-primary" style="display: none;">Previous Page</button>
-      <span id="currentPage" class="mr-3"></span>
-      <button id="nextPageButton" class="btn btn-primary">Next Page</button>
+
+
+
+  <!-- Main Content -->
+  <div class="container mt-5">
+    <div class="row"></div>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <div id="previousPageBtn" class="pagination-button"><i class="fas fa-chevron-left"></i> Previous Page</div>
+      <div id="pageNumbers" class="mx-4"></div>
+      <div id="nextPageBtn" class="pagination-button">Next Page <i class="fas fa-chevron-right"></i></div>
     </div>
   </div>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>        Coded with <span style="color: red;">❦</span> by Mutumba Jesse Paul        <br>
+      <p>        Coded with <span style="color: red;">❦</span> by Fresh Teacher        <br>
         &copy; Fresh Teacher Software <span id="currentYear"> </span><br>
         <a href="tel:+256750687790">0750687790</a> / <a href="tel:+256786812837">0786812837</a>
       </p>
     </div>
   </footer>
-  
-   <!-- Floating WhatsApp button -->
-   <a href="https://api.whatsapp.com/send?phone=+256750687790&text=Hi%20Fresh%20Teacher" class="floating-whatsapp">
-    <img src="whatsapp-logo.png" alt="WhatsApp" width="50">
-  </a>
 
-  <script>
-    const itemsPerPage = 21; // Number of items to display per page
-    let currentPage = parseInt(localStorage.getItem('currentPage')) || 1; // Current page number
-    let filteredItems = []; // Array to store filtered items
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7f8qz66b3Q5yT00E7Ga4Z+B/MxXQ5j+2U4Bqk4By9pFqwnq0v" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpA4KE7taVg8y6g6KbfsC5oSiFlocg8zoJsgm6nH7o5gKk5FbPE6PU6I+e" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nUw7p0azet+frh5MWLcD85v" crossorigin="anonymous"></script>
+</body>
 
-    // Sample JSON data (replace with your actual data)
-    const itemsData = [
-      {
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },
-      {
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },{
-        title: 'SST P.7 LESSON NOTES.pdf',
-        description: 'SST',
-        price: 5000,
-        link: 'https://freshteacher.software/SST P.7 LESSON NOTES.pdf',
-      },
-      {
-        title: 'English P.7 Lesson Notes Term 1.pdf',
-        description: 'English',
-        price: 5000,
-        link: 'https://freshteacher.software/English P.7 Lesson Notes Term 1.pdf',
-      },
-    ];
-
-    // Function to display items on the current page
-    function displayItems(items) {
-      const itemContainer = document.getElementById('itemContainer');
-      itemContainer.innerHTML = '';
-
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-
-        const card = document.createElement('div');
-        card.classList.add('col-md-4', 'mb-4');
-
-        const cardBody = document.createElement('div');
-        cardBody.classList.add('card', 'h-100');
-
-        const cardTitle = document.createElement('h5');
-        cardTitle.classList.add('card-title');
-        cardTitle.textContent = item.title;
-
-        const cardDescription = document.createElement('p');
-        cardDescription.classList.add('card-text');
-        cardDescription.textContent = item.description;
-
-        const cardPrice = document.createElement('p');
-        cardPrice.classList.add('card-text');
-        cardPrice.textContent = `Price: $${item.price}`;
-
-        const cardLink = document.createElement('a');
-        cardLink.classList.add('btn', 'btn-primary');
-        cardLink.href = item.link;
-        cardLink.target = '_blank';
-        cardLink.textContent = 'Download';
-
-        cardBody.appendChild(cardTitle);
-        cardBody.appendChild(cardDescription);
-        cardBody.appendChild(cardPrice);
-        cardBody.appendChild(cardLink);
-        card.appendChild(cardBody);
-        itemContainer.appendChild(card);
-      }
-    }
-
-    // Function to filter items based on the search query
-    function filterItems(query) {
-      const filtered = itemsData.filter((item) => {
-        const title = item.title.toLowerCase();
-        const description = item.description.toLowerCase();
-        return title.includes(query) || description.includes(query);
-      });
-      return filtered;
-    }
-
-    // Function to handle search input changes
-    function handleSearchInput(event) {
-      const searchQuery = event.target.value.toLowerCase();
-      const filtered = filterItems(searchQuery);
-      filteredItems = filtered;
-      currentPage = 1;
-      updatePaginationButtons();
-      displayCurrentPageItems();
-    }
-
-    // Function to display items on the current page
-    function displayCurrentPageItems() {
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-      const itemsToShow = filteredItems.slice(startIndex, endIndex);
-      displayItems(itemsToShow);
-      window.scrollTo(0, 0); // Scroll to top of page
-      document.getElementById('currentPage').textContent = `Page ${currentPage} of ${Math.ceil(filteredItems.length / itemsPerPage)}`;
-      localStorage.setItem('currentPage', currentPage); // Save current page to localStorage
-    }
-
-    // Function to update the state of the pagination buttons
-    function updatePaginationButtons() {
-      const prevPageButton = document.getElementById('prevPageButton');
-      const nextPageButton = document.getElementById('nextPageButton');
-
-      if (currentPage === 1) {
-        prevPageButton.style.display = 'none';
-      } else {
-        prevPageButton.style.display = 'inline';
-      }
-
-      if (currentPage === Math.ceil(filteredItems.length / itemsPerPage)) {
-        nextPageButton.style.display = 'none';
-      } else {
-        nextPageButton.style.display = 'inline';
-      }
-    }
-
-    // Function to handle the previous page button click
-    function handlePrevPageClick() {
-      if (currentPage > 1) {
-        currentPage--;
-        displayCurrentPageItems();
-        updatePaginationButtons();
-      }
-    }
-
-    // Function to handle the next page button click
-    function handleNextPageClick() {
-      const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-      if (currentPage < totalPages) {
-        currentPage++;
-        displayCurrentPageItems();
-        updatePaginationButtons();
-      }
-    }
-
-    // Add event listeners
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', handleSearchInput);
-
-    const prevPageButton = document.getElementById('prevPageButton');
-    prevPageButton.addEventListener('click', handlePrevPageClick);
-
-    const nextPageButton = document.getElementById('nextPageButton');
-    nextPageButton.addEventListener('click', handleNextPageClick);
-
-    // Initial setup
-    filteredItems = itemsData;
-    displayCurrentPageItems();
-    updatePaginationButtons();
-
-// Dynamically update the current year
-    const currentYearElement = document.getElementById('currentYear');
-    const currentYear = new Date().getFullYear();
-    currentYearElement.textContent = currentYear.toString();
-  </script>
-  </body>
 </html>
