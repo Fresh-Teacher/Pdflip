@@ -189,6 +189,15 @@ $(document).ready(function() {
   background-color: #f6f6f6;
 }
 
+  /* Styling for the floating WhatsApp button */
+  .floating-whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      padding: 10px;
+    }
+
 .search-bar {
       margin-bottom: 20px;
     }
@@ -390,6 +399,11 @@ h3 {
       </p>
     </div>
   </footer>
+
+    <!-- Floating WhatsApp button -->
+    <a href="https://api.whatsapp.com/send?phone=+256750687790&text=Hi%20Fresh%20Teacher" class="floating-whatsapp">
+      <img src="images/whatsapp-us.png" alt="WhatsApp" width="50">
+    </a>
 
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7f8qz66b3Q5yT00E7Ga4Z+B/MxXQ5j+2U4Bqk4By9pFqwnq0v" crossorigin="anonymous"></script>
