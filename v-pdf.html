@@ -217,12 +217,10 @@ $(document).ready(function () {
       color: green;
     }
 
-.logo-container {
+    .logo-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
-  flex-wrap: wrap; /* Add this line */
 }
 
 .logo {
@@ -243,11 +241,18 @@ $(document).ready(function () {
 .title {
   font-weight: bold;
   font-size: 18px;
+  margin-right: 10px;
 }
 
 .motto {
   font-size: 14px;
   font-style: italic;
+}
+
+.logo-image {
+  height: 40px;
+  width: auto;
+  margin-right: 10px; /* Adjust the margin as needed */
 }
 
 /* PDF Information Section */
@@ -331,15 +336,18 @@ h3 {
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
   <a class="navbar-brand" href="index.html">
     <div class="logo-container">
+      <div class="title">
+        <strong>FRESH TEACHERS' LIBRARY</strong>
+        <div class="motto">Learn. Unlearn. Relearn</div>
+      </div>
       <div class="logo">
         <img src="images/logo.png" alt="Logo" class="logo-image">
-        <div class="title"><p></p><strong>FRESH TEACHERS' LIBRARY</strong><p><em>Learn. Unlearn. Relearn</em></div>
       </div>
-      
     </div>
   </a>
-   
 </nav>
+
+
 
   <!-- Main Content -->
   <div class="container mt-5"><br>
