@@ -24,7 +24,6 @@
 
     p {
       margin-bottom: 10px;
-      text-align: justify;
     }
 
     strong {
@@ -42,11 +41,9 @@
       margin-bottom: 5px;
     }
 
-    footer {
-      background-color: #f6f6f6;
-      padding: 20px;
-      text-align: center;
-    }
+    .navbar-brand {
+  text-decoration: none;
+}
 
     .navbar-brand-content {
       display: flex;
@@ -62,6 +59,8 @@
 
     .navbar-brand-title {
       font-weight: bold;
+      text-decoration: none;
+      animation: blink 3s infinite;
     }
 
     .navbar-brand-motto {
@@ -73,10 +72,44 @@
     .navbar {
       position: sticky;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       background-color: #fff;
       padding: 10px 20px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Adjust the height and padding of the navbar */
+    .navbar {
+      height: 80px;
+      padding: 10px 20px;
+    }
+
+    footer {
+      background-color: #f6f6f6;
+      padding: 20px;
+      text-align: center;
+      /* Adjust the height of the footer */
+      height: 100px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   </style>
 </head>
@@ -93,6 +126,8 @@
         </div>
       </div>
     </a>
+  </nav>
+
     <h1>Disclaimer</h1>
 
     <p>This disclaimer governs your use of Fresh Teachers' Library website and services; by using our website and services, you accept this disclaimer in full. If you disagree with any part of this disclaimer, you must not use our website and services.</p>
