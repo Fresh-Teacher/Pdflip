@@ -1,75 +1,406 @@
 [
       
-      {
-        "title": "ENGLISH (2)",
-        "description": "Primary Three",
-        "price": 10000,
-        "pdfUrl": "https://freshteacher.software/ENGLISH (2).pdf"
-      },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "ENGLISH MID TERM SET ONE, 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "HOLIDAY PACKAGE ENGLISH P3.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "KAWAALA P3 MATH.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "KAWAALA P3 RE.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "MID TERM I ENGLISH 2023...pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "MID TERM I LITERACY 1 A 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "MID TERM I LITERACY 1 B 2023-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "MID TERM I NUMERACY 2023-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "MID TERM I NUMERACY 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "NAGGALAMA JUNIOR SCHOOL 2020  MATHEMATICS P3.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "NJS P.3 R.E.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P. 3 MTC MID TERM 1 2023-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P. 3 MTC MID TERM 1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3  RE  E.O.T 1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 ENG E.O.T 1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 ENG MID TERM 1 2023-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 ENG MID TERM 1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 eng topiCAL qns.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 ENG-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 English Revision booklet.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 ENTRY EXAM.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 HOLIDAY PACKAGE.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 m.t.c end of term 1 fnl.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 MATHEMATICS REVISON WORK BOOKLET.pdf.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 MATHS TOPICAL QUESTION.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 MATHS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 READ B.O.T  2  2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 READ E.O.T  1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 SCI  EO.T 1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 SCI END OF TERM 1, 2023 - Copy.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 SCI MID TERM 1 2023-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 SCI MID TERM 1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 Science Revision booklet.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 SCIENCE WORK BOOKLET.pdf.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 SST & RE  E.O.T 1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 SST MID TERM 1 2023-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 SST MID TERM 1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 SST Revision booklet.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 VSES ENGLISH BOT TWO 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3 WORK GAYAZA JR.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3_CRE_WEEK_2 GREEN HILL.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3_LITERACY_2_WEEK_2 GREEN HILL.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3_LITERACY_ONE_WEEK_2 GREEN HILL.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3_teachers_guide_-_Book.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3-ENG-SET-5.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3-ENG-SET-II.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3-LIT-1-A-SET-5.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3-LIT-1-B-SET5.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P.3MTC E.O.T 1 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "P3 READING.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "PRIMARY THREE (P.3) BEGINNING OF TERM TWO 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "PRIMARY THREE ENGLISH 2019 ok.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "Primary Three English Work Book Term 3.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "PRIMARY THREE ENGLISH WORKBOOK.pdf"
+  },
+  {
+    "title": "",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "PRIMARY THREE LITERACY I holiday package.pdf"
+  },
+  
+  {
+    "title": "ENGLISH (2)",
+    "description": "Primary Three",
+    "price": 5000,
+    "pdfUrl": "https://freshteacher.software/ENGLISH (2).pdf"
+  },
       {
         "title": "ENGLISH",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/ENGLISH.pdf"
       },
       {
         "title": "LITERACY I (SCIENCE)",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/LITERACY I (SCIENCE).pdf"
       },
       {
         "title": "MATHEMATIC",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/MATHEMATIC.pdf"
       },
       {
         "title": "Mathematics P_3 End of Term I Examination, 2018",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/Mathematics P_3 End of Term I Examination, 2018.pdf"
       },
       {
         "title": "P.3 ENGLISH LANGUAGE",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/P.3 ENGLISH LANGUAGE.pdf"
       },
       {
         "title": "P.3M",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/P.3M.pdf"
       },
       {
         "title": "p3 eng. mid term 3",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/p3 eng. mid term 3.pdf"
       },
       {
         "title": "p3 lit2",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/p3 lit2.pdf"
       },
       {
         "title": "p3 mtc mid term 3",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/p3 mtc mid term 3.pdf"
       },
       {
         "title": "R.E END OF TERM TWO",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/R.E END OF TERM TWO.pdf"
       },
       {
         "title": "EOT II P.3 MATH 2020",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/EOT II P.3 MATH 2020.pdf"
       },
       {
@@ -98,7 +429,7 @@
       },{
         "title": "NJS P.3 R.E",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/NJS P.3 R.E.pdf"
       },
       {
@@ -127,7 +458,7 @@
       },{
         "title": "P. 3 MTC SET I",
         "description": "Primary Three",
-        "price": 10000,
+        "price": 5000,
         "pdfUrl": "https://freshteacher.software/P. 3 MTC SET I.pdf"
       },
       {

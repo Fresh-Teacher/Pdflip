@@ -1,10 +1,394 @@
 [
-      {
-        "title": "SST P.7 LESSON NOTES",
-        "description": "SST",
-        "price": 5000,
-        "pdfUrl": "https://freshteacher.software/SST P.7 LESSON NOTES.pdf"
-      },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "70 Rules of English Grammar English Error Correction-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "M.T.C P.7 TERM 1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "All P.4 to P.7 Religious Education notes all terms.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "ALL SST NOTES P.4 TO P.7 ALL TERMS EXCEL-3.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "best English for p.7 2022 KESK.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "BRIDGED CURRICULUM NOTES FOR P7 SCIENCE 2022.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "C.R.E P.7 LESSON NOTES 202-25.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "CHRISTIAN RELIGIOUS EDUCATION LESSON NOTES P_7.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "Common mispelt words in science by Tr.Samuel Tweheyo vol.1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "EDUCATION-NOTES-FOR-PRIMARY-TEACHER-EDUCATION-PTE-Teacher.co_.ke_.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "ENGLISH GRAMMAR NOTES-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "English P.7 Lesson Notes Term 1-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "ENGLISH P.7LESSON NOTES 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "English StructureS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "EWALDI CRE LESSON NOTES FOR P7.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "EXCEL P.7 SST TERM I.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "EXCEL P.7 SST TERM II.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "EXCEL P.7 SST TERM III.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "ICT THEORY PRIMARY-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "Jumbled sentences.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "MATH P.7 LESSON NOTES 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "maths module 1- 21 MOES new 1 (2).pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "Mother majeri p.7.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "National-Teacher-Policy-Book-final-10th-Oct-2.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "notes SST p 7.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P. 7 Science Notes.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P_7-SCIENCE-LESSON-NOTES UPDATED.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 BEST SCIENCE NOTES TERM ONE TEACHER.AC (ecolebooks.com).pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 CRE Lesson Notes Term 2 (1).pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 LESSON NOTES MATHS - 2020.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 Mathematics Abridged Curriculum   edited (1).pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 mtc notes-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 MTC NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 RELIGIOUS EDUCATION LESSON NOTES TERM I 2019.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 SCIENCE LESSON NOTES 2019-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 Science Lesson notes for term 1-3.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 SCIENCE LESSON NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 SCIENCE NOTES 2023_18.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 SCIENCE NOTES 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 SEMU NOTES ALL TERMS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 SST NOTES ALL YEAR 2022.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7 SST notes.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7-BEST-ENGLISH-LESSON-NOTES-All terms..pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7-PRIMARY-SEVEN-ENG-NOTES_TEACHER.AC_.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7-PRIMARY-SEVEN-MTC-NOTES.docx_TEACHER.AC_.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7-SCIENCE-NOTES-TERM-ONE-2020.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P.7-SST-LESSON-NOTES-TERM-ONE-2020.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "p7  English lesson notes.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P7 eng notes-min.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P7 ENGLISH GRAMMAR LESSON NOTES 2022.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P7 MTC Lesson notes.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P7 MTC Notes 2022.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P7 Social studies  NOTES TERM 2 AND 3.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P7-Abridged-Curriculum_compressed-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "P7-ENGLISH-LESSON-NOTES-TERM-ONE-2020.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "PRIMARY SEVEN ENGLISH LESSON NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "PES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "S.S.T P.7 ALL YEAR 2023,.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "SCIENCE P.7 LESSON NOTES 2023.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "SST P.7 LESSON NOTES (1).pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "SST P.7 LESSON NOTES VICTORY.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "teachers code of conduct.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "THE DREAM SCIENCE BOOK SEVEN TERM 2.pdf"
+  },
+  {
+    "title": "",
+    "description": "Lesson Notes",
+    "price": 5000,
+    "pdfUrl": "THE USE OF NOT ONLY.pdf"
+  },
+  {
+    "title": "SST P.7 LESSON NOTES",
+    "description": "SST",
+    "price": 5000,
+    "pdfUrl": "https://freshteacher.software/SST P.7 LESSON NOTES.pdf"
+  },
       {
         "title": "English P.7 Lesson Notes Term 1",
         "description": "English",

@@ -2,123 +2,903 @@
   {
     "title": "",
     "description": "Senior Six",
-    "price": 10000,
+    "price": 5000,
+    "pdfUrl": "Understanding Pure Mathematics by A.J Sadler and D.W.S Thorning.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "_Backhouse 2(2).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "05 -- S.6 ENT 3 REVISION QNS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A _Level_ICT_NOTES modified.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A LEVEL BIOLOGY ECOLOGY.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A LEVEL GENETICS AND VARIATION FINAL BY TR. ISMAIL.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A LEVEL GEO 2 NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A LEVEL GEOGRAPHY PAPER 3 NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A level Syllabus.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A Must Have Advanced Level Physics Paper 1 By Kawuma Fahad.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A_ LEVEL PHYSICS 2.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A_Level_Entrepreneurship_Shaded.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A- Level inorganic chemistry.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-LEVEL BIOLOGY BY KUGONZA 2021.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-LEVEL European History NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-LEVEL I.R.E NOTES PAPER 2.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-Level IRE Notes - 6. Hadiith Compilers.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Binomial-theorem.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Complex-numbers.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Complex-numbers.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Equations-involving-indices-logarithms-and-others.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Indices-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Inequalities.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Permutations-and-combinations.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Polynomials.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Polynomials.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Quadratic-equations.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Simultaneous-equations.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-1-Trigonometry.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Binomial-distribution.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Centre-of-gravity.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Continuous-probability-distribution.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Correlation-and-scatter-diagrams.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-couple-of-forces.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Equlibrium-of-three-forces-Lamis-theorem-1 (1).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Errors-in-mathematics.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Index-numbers.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Probability-theory.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Resolutions-of-forces-acting-on-a-polygon.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Resultant-of-forces.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Tapezium-rule-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Vector-mechanics-relative-velocities.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A-level-math-paper-2-Vectors-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "A. RESPIRATION.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "ABE - ICT AND DATABASED BIOLOGY DELIVERY.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "AGRICULTURE ECONOMICS HAND OUT.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "all A ENT level notes (1).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "AM MUST HAVE A' Level Physics paper 2 by K.F.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "antidote for A level ecology.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "AQA-A-Level-Biology-Practical-Handbook-.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "BASIC ORGANIC CHEMISTRY NOTES 6.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "BIOLOGY (GASEOUS EXCHANGE).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "BIOLOGY CELL DIVISION AND GENETICS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "BIOLOGY CLASSIFICATION OF ORGANISMS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "BIOLOGY.BASIC AND SIMPLIFIED REVISION NOTES-A LEVEL.PDF"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "COMPLETE A LEVEL ECONOMICS BY CJ TRANTER .pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Complete UACE Sylubus.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "COMPLEX NUMBERS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "CYTOLOGY.NOVEL DISSECTION.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "CYTOLOGY.pdf.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "DISTRIBUTION COEFFICIENT.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "DIV 1 NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Div 3  by Kasozi Benon.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Ecology  A level.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "ECOLOGY (KUGONZA).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Economics manual edited-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "ECONOMICS Notes(1).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "ELECTROCHEMISTRY.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Essentials of Inorganic Chemistry ( PDFDrive ).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "eutectics.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Final Copy of Basic Inorganic Chemistry_013314.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "FOUNDATIONS OF ORGANIC CHEMISTRY by G Katumba.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "functional approach.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Geog 2 A level notes.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "GEOG PAPER 3-UGANDA AND FIELDWORK.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "GEOG3 Regional Geog of Uganda and field work.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "GEOGRAPHY PAPER 1 (2501) BY KITONSA RONALD.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "graph tips biology.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "GRAPHS_PRESENTATION.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Hist 4 A COMPREHENSIVE HISTORY OF SOUTH AFRICA.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "HIST 4 NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "History_syllabus_1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "HISTORY-OF-AFRICA-FROM-1855-1914-SIMPLIFIED.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "history.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Incandescent light bulb.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "INORGANIC CHEM.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "INORGANIC CHEMISTRY (WELL ORGANISED).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "INORGANIC CHEMISTRY NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "INSTANT BIOLOGY REVISION.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "JJEB 2022 SUB ICT PAPER TWO PRACTICAL .pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "JJEB 2022 SUB ICT PRACTICAL EXAMS Paper 3.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Kassec UACE Chem p1 2022.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "KIS 1 GA.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "KIS 2 GA.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "KIS 3 G A.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "KIS 3 GA.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Mathematics Mechanics and Probability by L.Bostock and S.Chandler.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "MECHANICS OF RESPIRATION BY MUGWE MARTIN.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "MECHANISMS IN ORGANIC CHEMISTRY.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "MENSURATION (AREA, SURFACE AREA AND VOLUME AND AREA OF CIRCLES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "MOVEMENT IN &OUT OF CELLS (KUGONZA).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "NEW UNDERSTANDING BIOLOGY (1).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Organic Chemistry Notes-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "ORGANIC CHEMISTRY-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Organic Chemistry.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "ORGANIC_CHEMISTRY_NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Physical Chemistry Notes A LEVEL-1-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "PHYSICAL CHEMISTRY-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "PHYSICS A LEVEL ALTERNATING CURRENT NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "PLANT HORMONES S6 BIO.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Principles and Methods of Teaching.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "PRINCIPLES OF APPLIED MATHS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Pure Mathematics for Advanced Level ( PDFDrive ).pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "REVISED INORGANIC CHEMISTRY NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "S.6 Geog notes - TRANSPORT   URBANISATION.docx.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "S.6 IRE 1 NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "S.6 IRE 3 NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "S.6 IRE P4 NOTES-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "S.6-Biology-Notes-Reproduction-in-Plants-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "S.6-GEOG-1-Notes.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "S6 CRE P245.1 Notes.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "S6 ENTREPRENEURSHIP P1 - ALL TOPICSBOOK.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "S6 European History notes.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "Syllabus - UACE Phy & mtc.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "TRANTER PURE MATHS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "UACE BIOLOGY CLASSIFICATION QUESTIONS AND ANSWERS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "UACE BIOLOGY CLASSIFICATION QUESTIONS AND ANSWERS.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "UACE GAS EXCHANGE- A LEVEL BIONOTES 2023-JUSAN-1.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "UACE INORGANIC CHEMISTRY NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
+    "pdfUrl": "UACE MATHEMATICS TWO REVISION NOTES.pdf"
+  },
+  {
+    "title": "",
+    "description": "Senior Six",
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A LEVEL AGRICULTURE ECONOMICS NOTES - Google Docs.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 15000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level AUTOTROPHIC NUTRITION.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 25000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A LEVEL BIOLOGY HETEROTROPHIC NUTRITION NOTES MOUNT OF OLIVIES.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 55000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A level Cellular Respiration Biology Notes .pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 2000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level computer networks.pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 10000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A LEVEL DIVINITY 3 NOTES .pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 15000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level ECONOMIC DEVELOPMENT PLANNING NOTES.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 25000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level Electricity.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 55000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level ELECTRONIC PRESENTATION.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 2000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level ELECTRONIC PUBLICATION.pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 10000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level ELECTRONIC SPREAD SHEETS.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 15000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A LEVEL INCOME AND TAXATION NOTES ECONOMICS.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 25000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level INTRODUCTION TO DATABASES.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 55000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A LEVEL PHYSCIS NOTES.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 2500,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A level Physics MECHANICS syllabus summary.pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 37000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A LEVEL PHYSICS PAPER 1 THERMAL PROPERTIES OF MATTER NOTES.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 13000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A LEVEL PHYSICS Scalars and Vectors summery notes.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 45000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A LEVEL PRINICIPLES OF AGRICULTURE ECONOMICS AND FARM MANAGEMENT NOTES STANDARDHIGHSCHOOL-ZZANA  (1).pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 57500,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level PRODUCTION THEORY AND MARKET STRUCTURES-1.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 24800,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A LEVEL PURE MATHEMATICS  VECTORS NOTES.pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 86000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/a level TRANSITION ELEMENTS.pdf"
   },
   {
@@ -130,170 +910,170 @@
   {
     "title": "",
     "description": "Senior Six",
-    "price": 29000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/A- Level Inorganic Chemistry Notes.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 95000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/ADVANCED LEVEL PURE MATHEMATICS; TRANTER.PDF"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 29000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Alevel biology notes (2).pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 12400,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/AGRICULTURE A LEVEL INTRODUCTION TO CROP SCIENCE NOTES STANDARD HIGH SCHOOL ZZANA.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 15800,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Alevel biology notes (2).pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 82000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Alevel Inorganic Chemistry Text Book.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 53000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Alevel Physics Introduction to Oscillations and Simple Harmonic Motion.pdf"    
     },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 13000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/ANTIDOTE for A level ecology Notes.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 10000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Applied Physics.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 15000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/BIOLOGY A LEVEL CELLULAR RESPIRATION.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 25000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/BIOLOGY A LEVEL CLASSIFICATION NOTES.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 55000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/BIOLOGY A LEVEL Summary of AN ATOMY AND DISSECTION of the TOAD.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 2000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/BIOLOGY A-LEVEL TRANSPORT OF MATERIALS NOTES  B Y KUGONZA H. ARTHUR.pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 10000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/CHEMISTRY A LEVEL Organic chemistry NOTES.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 15000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/CRE ADVANCED LEVEL PAPER ONE NOTES.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 25000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/CRE-S6-notes1.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 55000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/DIVINITY PAPER 2 NOTES A LEVEL.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 2000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/ECONOMICS PRICE THEORY NOTES  A LEVEL .pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 10000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/GAYAZA HIGH SCHOOL S.6 EXCRETION AND OSMOREGULATION NOTES.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 15000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Heat Thermometric Advanced Level Physics Notes.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 25000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Hodder Physics Revision Guide 2nd edition Alevel Text Book.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 55000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/HOMEOSTASIS EXCRETION AND OSMOREGULATION ALEVEL BIOLOGY NOTES .pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 2500,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/ICT HANDBOOK 2017 ALEVEL NOTES.pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 37000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/INORGANIC CHEMISTRY NOTES A LEVEL.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 13000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Introductory to  Alevel Physics II Text Book.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 45000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/MECHANICS A-LEVEL WORK.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 57500,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/MONEY AND BANKING NOTES a level paper2.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 24800,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/My A Level Maths Notes.pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 86000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/NCDC SELF STUDY Biology A level WORK.pdf"
   },
   {
@@ -305,58 +1085,58 @@
   {
     "title": "",
     "description": "Senior Six",
-    "price": 29000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/PHYSICS A LEVEL ALTERNATING CURRENT NOTES .pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 95000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/PHYSICS GRAVITATION NOTES A LEVEL PHYSICS.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 29000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/PHYSICS MAGNETISM  A-LEVEL NOTES.pdf"
   },{
     "title": "",
     "description": "Senior Six",
-    "price": 12400,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/PHYSICS waves notes A level .pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 15800,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Pure Mathematics -1 [Advance Level Maths].pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 82000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/REGIONAL GEOGRAPHY OF NORTH AMERICA NOTES O LEVEL.pdf"
   },
   {
     "title": "",
     "description": "Senior Six",
-    "price": 53000,
+    "price": 5000,
     "pdfUrl": "https://freshteacher.software/secondary/Reproduction in animals A Level NOTES .pdf"   
      },{
       "title": "",
       "description": "Senior Six",
-      "price": 10000,
+      "price": 5000,
       "pdfUrl": "https://freshteacher.software/secondary/S.6 CRE NOTES.pdf"
     },
     {
       "title": "",    "description": "Senior Six",
-      "price": 57500,
+      "price": 5000,
       "pdfUrl": "https://freshteacher.software/secondary/HISTORY PAPER 3 UACE THE RUSSIAN REVOLUTION OF 1917 NOTES.pdf"
     },
     {
       "title": "",
       "description": "Senior Six",
-      "price": 15000,
+      "price": 5000,
       "pdfUrl": "https://freshteacher.software/secondary/S6 BIOLOGY NOTES  LOCOMOTION AND SUPPORT 2020.pdf"
     }
 ]
