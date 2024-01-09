@@ -281,12 +281,14 @@
       "pdfUrl":"https://fresh-teacher.github.io/baby/Baby Eng Language Devt 2 Scheme Term 2.pdf"
 
        },
-       {
+       {"description": "Nursery Notes",
+        "price":"5000",
         "pdfUrl":"https://fresh-teacher.github.io/baby/baby English notes I-III.pdf"
   
          },
-{
-            "pdfUrl":"https://fresh-teacher.github.io/baby/ BABY NOTES 2020.pdf"
+{"description": "Nursery Notes",
+        "price":"5000",
+            "pdfUrl":"https://fresh-teacher.github.io/baby/BABY NOTES 2020.pdf"
 
       
              },
