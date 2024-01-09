@@ -62,41 +62,42 @@
        },
 {"description": "Nursery Notes",
         "price":"5000",
-      "pdfUrl":"https://fresh-teacher.github.io/baby/ 06. Learning The Alphabet ABC - Workbook 1 author Kathryn J. Davis.pdf"
+      "pdfUrl":"https://fresh-teacher.github.io/baby/06. Learning The Alphabet ABC - Workbook 1 author Kathryn J. Davis.pdf"
        },
 
-{
-      "pdfUrl":"https://fresh-teacher.github.io/baby/ 10. First Steps in Reading and Writing author Gouvernement du Québec.pdf"
+{"description": "Nursery Notes",
+        "price":"5000",
+      "pdfUrl":"https://fresh-teacher.github.io/baby/10. First Steps in Reading and Writing author Gouvernement du Québec.pdf"
 
 
        },
 {"description": "Nursery Notes",
         "price":"5000",
-      "pdfUrl":"https://fresh-teacher.github.io/baby/ 11. Letters and Sounds author Various authors .pdf"
+      "pdfUrl":"https://fresh-teacher.github.io/baby/11. Letters and Sounds author Various authors .pdf"
 
 
        },
 {"description": "Nursery Notes",
         "price":"5000",
-      "pdfUrl":"https://fresh-teacher.github.io/baby/ 12. World of Letters Kindergarten author Oxford University.pdf"
+      "pdfUrl":"https://fresh-teacher.github.io/baby/12. World of Letters Kindergarten author Oxford University.pdf"
 
 
        },
 {"description": "Nursery Notes",
         "price":"5000",
-      "pdfUrl":"https://fresh-teacher.github.io/baby/ 13. Learning To Read, Reading To Learn author Various authors .pdf"
+      "pdfUrl":"https://fresh-teacher.github.io/baby/13. Learning To Read, Reading To Learn author Various authors .pdf"
 
 
        },
 {"description": "Nursery Notes",
         "price":"5000",
-      "pdfUrl":"https://fresh-teacher.github.io/baby/ 14. A Child Becomes a Reader author Bonnie B. Armbruster, Fran Lehr, Jean Osborn.pdf"
+      "pdfUrl":"https://fresh-teacher.github.io/baby/14. A Child Becomes a Reader author Bonnie B. Armbruster, Fran Lehr, Jean Osborn.pdf"
 
 
        },
 {"description": "Nursery Notes",
         "price":"5000",
-      "pdfUrl":"https://fresh-teacher.github.io/baby/ 15. How young children learn to read author B. A. Essay.pdf"
+      "pdfUrl":"https://fresh-teacher.github.io/baby/15. How young children learn to read author B. A. Essay.pdf"
 
 
        },
@@ -396,7 +397,7 @@
 
        },
        {
-        "pdfUrl":"https://fresh-teacher.github.io/baby/EYFS%20Phonics%20and%20Provision.161698873-1.pdf"
+        "pdfUrl":"https://fresh-teacher.github.io/baby/Phonics in Reception.pdf"
   
          },
          {"description": "Nursery Notes",
@@ -437,7 +438,7 @@
        },
 {"description": "Nursery Notes",
         "price":"5000",
-      "pdfUrl":"https://fresh-teacher.github.io/baby/Jolly%20Phonics%20Actions%20Sheet%20.pdf"
+      "pdfUrl":"https://fresh-teacher.github.io/baby/Jolly Phonics Actions Sheet.pdf"
 
        },
 {"description": "Nursery Notes",
@@ -546,7 +547,8 @@
 
        },
 
-       {
+       {"description": "Nursery Notes",
+         "price":"5000",
         "pdfUrl":"https://fresh-teacher.github.io/baby/PARENT-TEACHER GUIDE JOLLY PHONICS.pdf"
   
          },
