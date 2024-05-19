@@ -1,188 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="shortcut icon" href="images/KPK_Logo.svg">
-  <title>Senior Six Past Papers</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- AJAX -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-  <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="css/flipbook.style.css">
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-  <link rel="stylesheet" type="text/css" href="css/footer.css">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
-  <!-- Include JS -->
-  <script src="js/flipbook.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Scroll with Search and Flipbook</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="js/flipbook.style.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+    .card {
+      margin-bottom: 1rem;
     }
-    .container {
-      padding-top: 20px;
+    .free-text {
+      color: green;
+      font-weight: bold;
     }
-    .search-box {
-      margin-bottom: 20px;
-    }
-    #loading {
-      text-align: center;
+    .spinner {
       display: none;
+      text-align: center;
       margin: 20px 0;
     }
-    #no-results {
-      text-align: center;
+    .end-message, #no-results {
       display: none;
+      text-align: center;
       margin: 20px 0;
-      color: red;
+      color: gray;
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
-    <a class="navbar-brand" href="index.html">
-      <div class="navbar-brand-content">
-        <img src="images/logo.png" alt="Fresh Teacher's Logo" width="50" height="50">
-        <div class="navbar-brand-text">
-          <span class="navbar-brand-title"><strong>FRESH TEACHER'S E-LIBRARY 📚</strong></span>
-          <span class="navbar-brand-motto"><em>Learn. Unlearn. Relearn</em></span>
-        </div>
-      </div>
-    </a>
-  </nav>
 
-  <!-- Main Content -->
-  <div class="container mt-5">
-    <!-- Search Bar -->
-    <div class="container mt-5"><br>
-      <div class="search-bar">
-        <input type="text" id="search" class="search-input form-control" placeholder="Search for content...">
-      </div>
-      <div id="item-container" class="row"></div>
-      <div id="loading">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-      <div id="no-results">No results found</div>
+<div class="container mt-5">
+  <input type="text" id="search" class="form-control mb-4" placeholder="Search items...">
+  <div id="items-container" class="row">
+    <!-- Cards will be appended here -->
+  </div>
+  <div class="spinner">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
   </div>
+  <div id="no-results" class="text-center text-danger">
+    No results found.
+  </div>
+  <div id="end-of-content" class="end-message">
+    You have reached the bottom of the page. No more items to display.
+  </div>
+</div>
 
-  <!-- Footer -->
-  <footer class="footer" style="background-color: #ffffff; height: 100px; display: flex; justify-content: center; align-items: center;">
-    <div class="container">
-      <p style="text-align: center;">
-        Made with <span style="color: red;">❦</span> by Mutumba Jesse Paul aka Fresh Teacher<br>
-        &copy; Fresh Teacher's Software <span id="currentYear"></span><br>
-        <a href="tel:+256750687790">0750687790</a> / <a href="tel:+256786812837">0786812837</a> <br>     
-        <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <a href="disclaimer.html">Disclaimer</a>
-      </p>
-    </div>
-  </footer>
-  <!-- End of Footer -->
+<!-- Flipbook container -->
+<div id="pdf-flipbook-container" style="display: none;"></div>
 
-  <!-- Floating WhatsApp button -->
-  <a href="https://api.whatsapp.com/send?phone=+256750687790&text=Hi%20Fresh%20Teacher" class="floating-whatsapp">
-    <img src="images/whatsapp-us.png" alt="WhatsApp" width="50">
-  </a>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/flipbook.min.js"></script>
+<script>
+$(document).ready(function() {
+  let items = [];
+  let filteredItems = [];
+  let currentIndex = 0;
+  const itemsPerPage = 10;
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7f8qz66b3Q5yT00E7Ga4Z+B/MxXQ5j+2U4Bqk4By9pFqwnq0v" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpA4KE7taVg8y6g6KbfsC5oSiFlocg8zoJsgm6nH7o5gKk5FbPE6PU6I+e" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nUw7p0azet+frh5MWLcD85v" crossorigin="anonymous"></script>
+  // Fetch the data
+  $.getJSON('data.json', function(data) {
+    items = data;
+    filteredItems = items;
+    loadItems();
+  });
 
-  <script>
-    const itemsPerPage = 12;
-    let currentPage = 1;
-    let searchTerm = '';
-    let allItems = [];
-    let loading = false;
+  // Load items
+  function loadItems() {
+    const container = $('#items-container');
+    const spinner = $('.spinner');
+    const endMessage = $('#end-of-content');
+    const noResultsMessage = $('#no-results');
 
-    async function fetchItems() {
-      try {
-        const response = await fetch('SeniorSixPastPapers.json');
-        allItems = await response.json();
-        displayItems();
-      } catch (error) {
-        console.error('Error fetching items:', error);
-      }
+    if (filteredItems.length === 0) {
+      noResultsMessage.show();
+      spinner.hide();
+      endMessage.hide();
+      return;
+    } else {
+      noResultsMessage.hide();
     }
 
-    function displayItems() {
-      const container = document.getElementById('item-container');
-      const loadingElement = document.getElementById('loading');
-      const noResultsElement = document.getElementById('no-results');
+    // Show spinner while loading
+    spinner.show();
 
-      if (currentPage === 1) {
-        container.innerHTML = ''; // Clear previous items if it's a new search
-      }
+    setTimeout(() => {
+      const endIndex = currentIndex + itemsPerPage;
 
-      const filteredItems = allItems.filter(item => 
-        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      filteredItems.slice(currentIndex, endIndex).forEach((item, index) => {
+        const pdfId = "read" + (currentIndex + index + 1);
+        const pdfUrl = item.pdfUrl;
+        const fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
+        const title = fileName.toUpperCase(); // Capitalize the extracted file name
+        const description = item.description;
 
-      if (filteredItems.length === 0 && currentPage === 1) {
-        noResultsElement.style.display = 'block';
-        loadingElement.style.display = 'none';
-        return;
-      } else {
-        noResultsElement.style.display = 'none';
-      }
+        const pdfSection = `
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h3 id="title${currentIndex + index + 1}">${title}</h3>
+                <p class="description">${description}</p>
+                <p>Price: <span class="price"><del>${item.price}</del></span> <span class="free-text">FREE</span></p>
+                <div class="button">
+                  <a id="${pdfId}" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
+                  <a href="${pdfUrl}" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>`;
 
-      const start = (currentPage - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      const itemsToShow = filteredItems.slice(start, end);
-
-      $.each(itemsToShow, function(index, item) {
-        var pdfId = "read" + (index + 1);
-        var pdfUrl = item.pdfUrl;
-        var fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
-        var title = fileName.toUpperCase(); // Capitalize the extracted file name
-        var description = item.description;
-
-        var pdfSection = '<div class="col-md-4 mb-3">' +
-          '<div class="card">' +
-          '<div class="card-body">' +
-          '<h3 id="title' + (index + 1) + '">' + title + '</h3>' +
-          '<p class="description">' + description + '</p>' +
-          '<p>Price: <span class="price"><del>' + item.price + '</del></span> <span class="free-text">FREE</span></p>' +
-          '<div class="button">' +
-          '<a id="' + pdfId + '" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>' +
-          '<a href="' + pdfUrl + '" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>' +
-          '</div>' +
-          '</div>' +
-          '</div>' +
-          '</div>';
-
-        $(".row").append(pdfSection);
+        container.append(pdfSection);
 
         $("#" + pdfId).flipBook({
-          // Layout Setting
-          pdfUrl: item.pdfUrl,
+          pdfUrl: pdfUrl,
           lightBox: true,
           layout: 3,
           currentPage: {
             vAlign: "bottom",
             hAlign: "left"
           },
-          // BTN SETTING
-          btnShare: {
-            enabled: false
-          },
-          btnPrint: {
-            enabled: false // Disable the print button
-          },
-          btnDownloadPages: {
-            enabled: false // Disable the download pages button
-          },
+          btnShare: { enabled: false },
+          btnPrint: { enabled: false },
+          btnDownloadPages: { enabled: false },
           btnColor: 'rgb(255,120,60)',
           sideBtnColor: 'rgb(255,120,60)',
           sideBtnSize: 60,
@@ -199,34 +139,44 @@
         });
       });
 
-      if (filteredItems.length > end) {
-        loadingElement.style.display = 'none';
-        loading = false;
+      currentIndex = endIndex;
+      spinner.hide();
+
+      if (currentIndex >= filteredItems.length) {
+        endMessage.show();
       } else {
-        loadingElement.style.display = 'none'; // Hide loading message if no more items
+        endMessage.hide();
       }
+    }, 500); // Simulate loading time
+  }
+
+  // Infinite scroll
+  $(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 10) {
+      loadItems();
     }
+  });
 
-    function handleScroll() {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
-        const loadingElement = document.getElementById('loading');
-        loading = true;
-        loadingElement.style.display = 'block';
-        currentPage++;
-        setTimeout(displayItems, 1000); // Simulate loading delay
-      }
+  // Search functionality
+  $('#search').on('input', function() {
+    const searchTerm = $(this).val().toLowerCase();
+    filteredItems = items.filter(item => {
+      const title = item.pdfUrl.substring(item.pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "").toLowerCase();
+      const description = item.description.toLowerCase();
+      return title.includes(searchTerm) || description.includes(searchTerm);
+    });
+    currentIndex = 0;
+    $('#items-container').empty();
+
+    if (filteredItems.length === 0) {
+      $('#no-results').show();
+      $('#end-of-content').hide();
+    } else {
+      $('#no-results').hide();
+      loadItems();
     }
-
-    function handleSearch(event) {
-      searchTerm = event.target.value;
-      currentPage = 1;
-      displayItems();
-    }
-
-    document.getElementById('search').addEventListener('input', handleSearch);
-    window.addEventListener('scroll', handleScroll);
-
-    fetchItems();
-  </script>
+  });
+});
+</script>
 </body>
 </html>
