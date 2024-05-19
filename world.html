@@ -2,8 +2,52 @@
 <html>
 
 <head>
-  <link rel="shortcut icon" href="images/KPK_Logo.svg">
-  <title>Senior Six Past Papers</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SS26CRENX2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-SS26CRENX2');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KGD6TVT');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGD6TVT" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <!-- Add these lines to include Bootstrap CSS and JavaScript -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Welcome To Fresh Teacher's Library, one stop center for academic needs of Ugandan schools. Our core mandate is to apply creativity and come up with innovative solutions in Ugandas' education sector.">
+    <meta name="keyword" content="Fresh Teacher's Library, www.freshteacheruganda.com, Schemes Of Work, Lesson Plans, Lesson Notes, Topical Questions, Luganda Translated Movies, Past Papers">
+    <meta name="author" content="Fresh Teacher">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.jpg">
+        <link rel="manifest" href="/manifest.json" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta property="og:site_name" content="Fresh Teacher's Library" />
+    <meta property="og:image" content="https://2.bp.blogspot.com/-IEabwvLwNVY/XnccoVSvUgI/AAAAAAAAFro/mQPkBepUZpcNo1WG8trICTTg7unzwwXSgCK4BGAYYCw/s1600/SquareFit_20200322_064134.jpg" />
+    <title>Fresh Teacher's Library 📚 </title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +55,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
   <!-- Costume CSS -->
-  <link rel="stylesheet" type="text/css" href="css/flipbook.style.css">
+  <link rel="stylesheet" type="text/css" href="js/flipbook.style.css">
   <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="css/footer.css">
   <!-- Bootstrap CSS -->
@@ -480,17 +524,13 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
     <a class="navbar-brand" href="index.html">
       <div class="navbar-brand-content">
-        <img src="images/logo.png" alt="Fresh Teacher's Logo" width="50" height="50">
-        <div class="navbar-brand-text">
-          <span class="navbar-brand-title"><strong>FRESH TEACHER'S E-LIBRARY 📚</strong></span>
-          <span class="navbar-brand-motto"><em>Learn. Unlearn. Relearn</em></span>
-        </div>
+            <a href="index.html">
+                <button class="btn btn-danger animated-btn">↩ RETURN TO LIBRARY 📚</button>
+            </a>  </div>
       </div>
     </a>
-          <a href="index.html">
-        <button class="btn btn-danger animated-btn">↩ RETURN TO LIBRARY 📚</button>
-    </a>
-  </nav><br><br><br><br>
+       
+  </nav><br>
 
 
 <div class="container mt-5">
@@ -521,7 +561,7 @@ $(document).ready(function() {
   const itemsPerPage = 12;
 
   // Fetch the data
-  $.getJSON('SeniorSixPastPapers.json', function(data) {
+  $.getJSON('data.json', function(data) {
     items = data;
     filteredItems = items;
     loadItems();
