@@ -110,7 +110,7 @@
 
       async function fetchItems() {
         try {
-          const response = await fetch('data.json');
+          const response = await fetch('SeniorSixPastPapers.json');
           allItems = await response.json();
           displayItems();
         } catch (error) {
