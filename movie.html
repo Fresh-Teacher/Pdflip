@@ -30,7 +30,18 @@
   </div>
   <p id="noMoreResults" class="text-center"></p>
 </div>
-
+<!-- AJAX -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<!-- Costume CSS -->
+<link href="css/flipbook.style.css" rel="stylesheet" type="text/css"/>
+<link href="css/font-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="css/footer.css" rel="stylesheet" type="text/css"/>
+<!-- Bootstrap CSS -->
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" rel="stylesheet"/>
+<!-- Include JS -->
+<script src="js/flipbook.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -75,7 +86,8 @@ function renderData() {
   if (currentData.length === 0 && currentPage === 1) {
     $('#cardsContainer').html('<p class="col-12 text-center">NO RESULTS FOUND</p>');
   } else {
-    currentData.forEach(item => {
+    currentData.forEach((item, index) => {
+      const pdfId = 'pdf_' + index;
       $('#cardsContainer').append(`
         <div class="col-md-4 mb-3">
           <div class="card">
@@ -84,15 +96,53 @@ function renderData() {
               <p class="description">${item.description}</p>
               <p>Price: <span class="price"><del>${item.price}</del></span> <span class="free-text">FREE</span></p>
               <div class="button">
-                <a href="${item.pdfUrl}" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
+                <button class="view-file-btn btn btn-primary mt-2 mr-2 text-white" data-pdf-id="${pdfId}" data-pdf-url="${item.pdfUrl}">View File <i class="fas fa-book-reader fa-lg"></i></button>
                 <a href="${item.pdfUrl}" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
               </div>
             </div>
           </div>
         </div>
       `);
+
+      // Bind click event for View File button
+      $(document).on('click', '.view-file-btn', function() {
+        const pdfUrl = $(this).data('pdf-url');
+        const pdfId = $(this).data('pdf-id');
+        $("#" + pdfId).flipBook({
+          pdfUrl: pdfUrl,
+          lightBox: true,
+          layout: 3,
+          currentPage: {
+            vAlign: "bottom",
+            hAlign: "left"
+          },
+          btnShare: {
+            enabled: false
+          },
+          btnPrint: {
+            enabled: true
+          },
+          btnDownloadPages: {
+            enabled: true
+          },
+          btnColor: 'rgb(255,120,60)',
+          sideBtnColor: 'rgb(255,120,60)',
+          sideBtnSize: 60,
+          sideBtnBackground: "rgba(0,0,0,.7)",
+          sideBtnRadius: 60,
+          btnSound: {
+            vAlign: "top",
+            hAlign: "left"
+          },
+          btnAutoplay: {
+            vAlign: "top",
+            hAlign: "left"
+          },
+        });
+      });
     });
-    if (currentData.length < itemsPerPage && currentPage === 1) {
+
+    if (currentData.length < itemsPerPage) {
       $('#noMoreResults').text('NO MORE RESULTS FOUND');
     }
   }
