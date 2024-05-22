@@ -45,9 +45,10 @@
 <script src="js/flipbook.min.js"></script>
 <script>
     const itemsPerPage = 12;
-    let currentPage = 1;
+    let currentIndex = 0;
     let allData = [];
     let filteredData = [];
+    let isLoading = false;
   
     $(document).ready(function() {
       fetchData();
@@ -59,10 +60,8 @@
   
       $(window).scroll(function() {
         if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-          if ((currentPage - 1) * itemsPerPage < filteredData.length) {
+          if (currentIndex < filteredData.length && !isLoading) {
             loadMoreData();
-          } else {
-            $('#noMoreResults').text('NO MORE RESULTS FOUND');
           }
         }
       });
@@ -72,81 +71,86 @@
       $.getJSON('data.json', function(data) {
         allData = data;
         filteredData = data;
-        renderData();
+        loadMoreData();
       });
     }
   
-    function renderData() {
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = currentPage * itemsPerPage;
-      const currentData = filteredData.slice(startIndex, endIndex);
+    function loadMoreData() {
+      if (isLoading) return;
+      isLoading = true;
   
-      if (currentData.length === 0 && currentPage === 1) {
-        $('#cardsContainer').html('<p class="col-12 text-center">NO RESULTS FOUND</p>');
-      } else {
-        currentData.forEach((item, index) => {
-          const pdfId = `read${startIndex + index + 1}`;
-          $('#cardsContainer').append(`
-            <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <h3>${item.title}</h3>
-                  <p class="description">${item.description}</p>
-                  <p>Price: <span class="price"><del>${item.price}</del></span> <span class="free-text">FREE</span></p>
-                  <div class="button">
-                    <a id="${pdfId}" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
-                    <a href="${item.pdfUrl}" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
+      const spinner = $('.spinner');
+      spinner.show();
+  
+      setTimeout(() => {
+        const startIndex = currentIndex;
+        const endIndex = Math.min(currentIndex + itemsPerPage, filteredData.length);
+        const currentData = filteredData.slice(startIndex, endIndex);
+  
+        if (currentData.length === 0 && currentIndex === 0) {
+          $('#cardsContainer').html('<p class="col-12 text-center">NO RESULTS FOUND</p>');
+        } else {
+          currentData.forEach((item, index) => {
+            const pdfId = `read${startIndex + index + 1}`;
+            $('#cardsContainer').append(`
+              <div class="col-md-4 mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h3>${item.title}</h3>
+                    <p class="description">${item.description}</p>
+                    <p>Price: <span class="price"><del>${item.price}</del></span> <span class="free-text">FREE</span></p>
+                    <div class="button">
+                      <a id="${pdfId}" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
+                      <a href="${item.pdfUrl}" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>`);
+              </div>`);
   
-          // Initialize flipbook for the current PDF
-          $(`#${pdfId}`).flipBook({
-            pdfUrl: item.pdfUrl,
-            lightBox: true,
-            layout: 3,
-            currentPage: {
-              vAlign: "bottom",
-              hAlign: "left"
-            },
-            btnShare: {
-              enabled: false
-            },
-            btnPrint: {
-              enabled: true
-            },
-            btnDownloadPages: {
-              enabled: true
-            },
-            btnColor: 'rgb(255,120,60)',
-            sideBtnColor: 'rgb(255,120,60)',
-            sideBtnSize: 60,
-            sideBtnBackground: "rgba(0,0,0,.7)",
-            sideBtnRadius: 60,
-            btnSound: {
-              vAlign: "top",
-              hAlign: "left"
-            },
-            btnAutoplay: {
-              vAlign: "top",
-              hAlign: "left"
-            }
+            // Initialize flipbook for the current PDF
+            $(`#${pdfId}`).flipBook({
+              pdfUrl: item.pdfUrl,
+              lightBox: true,
+              layout: 3,
+              currentPage: {
+                vAlign: "bottom",
+                hAlign: "left"
+              },
+              btnShare: {
+                enabled: false
+              },
+              btnPrint: {
+                enabled: true
+              },
+              btnDownloadPages: {
+                enabled: true
+              },
+              btnColor: 'rgb(255,120,60)',
+              sideBtnColor: 'rgb(255,120,60)',
+              sideBtnSize: 60,
+              sideBtnBackground: "rgba(0,0,0,.7)",
+              sideBtnRadius: 60,
+              btnSound: {
+                vAlign: "top",
+                hAlign: "left"
+              },
+              btnAutoplay: {
+                vAlign: "top",
+                hAlign: "left"
+              }
+            });
           });
-        });
-        if (currentData.length < itemsPerPage) {
-          $('#noMoreResults').text('NO MORE RESULTS FOUND');
-        }
-      }
-    }
   
-    function loadMoreData() {
-      $('.spinner').show();
-      setTimeout(() => {
-        currentPage++;
-        renderData();
-        $('.spinner').hide();
-      }, 1000);
+          currentIndex = endIndex;
+  
+          if (currentIndex >= filteredData.length) {
+            $('#noMoreResults').text('No More Items to Display ').show();
+          }
+        }
+  
+        spinner.hide();
+        isLoading = false;
+      }, 500);
     }
   
     function filterData(query) {
@@ -154,13 +158,12 @@
         item.title.toLowerCase().includes(query) || 
         item.description.toLowerCase().includes(query)
       );
-      currentPage = 1;
+      currentIndex = 0;
       $('#cardsContainer').empty();
-      $('#noMoreResults').text('');
-      renderData();
+      $('#noMoreResults').hide();
+      loadMoreData();
     }
   </script>
   
-
 </body>
 </html>
