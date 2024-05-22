@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infinite Scroll with Search</title>
+  <title>Infinite Scroll with Search and Flipbook</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     .free-text {
@@ -30,86 +30,79 @@
   </div>
   <p id="noMoreResults" class="text-center"></p>
 </div>
-<!-- AJAX -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-<!-- Costume CSS -->
-<link href="css/flipbook.style.css" rel="stylesheet" type="text/css"/>
-<link href="css/font-awesome.css" rel="stylesheet" type="text/css"/>
-<link href="css/footer.css" rel="stylesheet" type="text/css"/>
-<!-- Bootstrap CSS -->
-<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet"/>
-<link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" rel="stylesheet"/>
-<!-- Include JS -->
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="js/flipbook.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<link href="css/flipbook.style.css" rel="stylesheet" type="text/css"/>
+
 <script>
- const itemsPerPage = 12;
-let currentPage = 1;
-let allData = [];
-let filteredData = [];
-let isLoading = false;
+  const itemsPerPage = 12;
+  let currentPage = 1;
+  let allData = [];
+  let filteredData = [];
+  let isLoading = false;
 
-$(document).ready(function() {
-  fetchData();
+  $(document).ready(function() {
+    fetchData();
 
-  $('#searchInput').on('input', function() {
-    const query = $(this).val().toLowerCase();
-    filterData(query);
-  });
+    $('#searchInput').on('input', function() {
+      const query = $(this).val().toLowerCase();
+      filterData(query);
+    });
 
-  $(window).scroll(function() {
-    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-      if (!isLoading && (currentPage - 1) * itemsPerPage < filteredData.length) {
-        loadMoreData();
-      } else if ((currentPage - 1) * itemsPerPage >= filteredData.length) {
-        $('#noMoreResults').text('NO MORE RESULTS FOUND');
+    $(window).scroll(function() {
+      if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+        if (!isLoading && (currentPage - 1) * itemsPerPage < filteredData.length) {
+          loadMoreData();
+        } else if ((currentPage - 1) * itemsPerPage >= filteredData.length) {
+          $('#noMoreResults').text('NO MORE RESULTS FOUND');
+        }
       }
-    }
+    });
   });
-});
 
-function fetchData() {
-  $.getJSON('data.json', function(data) {
-    allData = data;
-    filteredData = data;
-    renderData();
-  });
-}
+  function fetchData() {
+    $.getJSON('SeniorSixPastPapers.json', function(data) {
+      allData = data;
+      filteredData = data;
+      renderData();
+    });
+  }
 
-function renderData() {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = currentPage * itemsPerPage;
-  const currentData = filteredData.slice(startIndex, endIndex);
+  function renderData() {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = currentPage * itemsPerPage;
+    const currentData = filteredData.slice(startIndex, endIndex);
 
-  if (currentData.length === 0 && currentPage === 1) {
-    $('#cardsContainer').html('<p class="col-12 text-center">NO RESULTS FOUND</p>');
-  } else {
-    currentData.forEach((item, index) => {
-      const pdfId = 'pdf_' + index;
-      $('#cardsContainer').append(`
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h3>${item.title}</h3>
-              <p class="description">${item.description}</p>
-              <p>Price: <span class="price"><del>${item.price}</del></span> <span class="free-text">FREE</span></p>
-              <div class="button">
-                <button class="view-file-btn btn btn-primary mt-2 mr-2 text-white" data-pdf-id="${pdfId}" data-pdf-url="${item.pdfUrl}">View File <i class="fas fa-book-reader fa-lg"></i></button>
-                <a href="${item.pdfUrl}" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
+    if (currentData.length === 0 && currentPage === 1) {
+      $('#cardsContainer').html('<p class="col-12 text-center">NO RESULTS FOUND</p>');
+    } else {
+      currentData.forEach((item, index) => {
+        const pdfId = "read" + (startIndex + index + 1);
+        const pdfUrl = item.pdfUrl;
+        const fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
+        const title = fileName.toUpperCase();
+        const description = item.description;
+
+        $('#cardsContainer').append(`
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h3>${title}</h3>
+                <p class="description">${description}</p>
+                <p>Price: <span class="price"><del>${item.price}</del></span> <span class="free-text">FREE</span></p>
+                <div class="button">
+                  <a id="${pdfId}" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
+                  <a href="${pdfUrl}" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      `);
+        `);
 
-      // Bind click event for View File button
-      $(document).on('click', '.view-file-btn', function() {
-        const pdfUrl = $(this).data('pdf-url');
-        const pdfId = $(this).data('pdf-id');
         $("#" + pdfId).flipBook({
-          pdfUrl: pdfUrl,
+          pdfUrl: item.pdfUrl,
           lightBox: true,
           layout: 3,
           currentPage: {
@@ -140,37 +133,35 @@ function renderData() {
           },
         });
       });
-    });
 
-    if (currentData.length < itemsPerPage) {
-      $('#noMoreResults').text('NO MORE RESULTS FOUND');
+      if (currentData.length < itemsPerPage && currentPage === 1) {
+        $('#noMoreResults').text('NO MORE RESULTS FOUND');
+      }
     }
   }
-}
 
-function loadMoreData() {
-  if (isLoading) return;
-  isLoading = true;
-  $('.spinner').show();
-  setTimeout(() => {
-    currentPage++;
+  function loadMoreData() {
+    if (isLoading) return;
+    isLoading = true;
+    $('.spinner').show();
+    setTimeout(() => {
+      currentPage++;
+      renderData();
+      isLoading = false;
+      $('.spinner').hide();
+    }, 1000);
+  }
+
+  function filterData(query) {
+    filteredData = allData.filter(item => 
+      item.title.toLowerCase().includes(query) || 
+      item.description.toLowerCase().includes(query)
+    );
+    currentPage = 1;
+    $('#cardsContainer').empty();
+    $('#noMoreResults').text('');
     renderData();
-    isLoading = false;
-    $('.spinner').hide();
-  }, 1000);
-}
-
-function filterData(query) {
-  filteredData = allData.filter(item => 
-    item.title.toLowerCase().includes(query) || 
-    item.description.toLowerCase().includes(query)
-  );
-  currentPage = 1;
-  $('#cardsContainer').empty();
-  $('#noMoreResults').text('');
-  renderData();
-}
-
+  }
 </script>
 
 </body>
