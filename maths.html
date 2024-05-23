@@ -505,13 +505,13 @@
 <button class="btn btn-danger animated-btn"><strong>↩ RETURN TO LIBRARY 📚</strong></button>
 </a> </div>
 </a>
-</nav><br/>
+</nav><br/><br/>
 <body>
     <div class="container">
         <br/><br/>
         <div class="row">
           <div class="col-md-12 mb-3">
-            <input type="text" id="searchInput" class="form-control" placeholder="🔍 Search for content here...">
+            <input type="text" id="searchInput" class="form-control" placeholder="🔍 Type a keyword here to search...">
           </div>
         </div>
         <div class="row" id="cardsContainer"></div>
@@ -555,14 +555,14 @@
                 if (!isLoading && (currentPage - 1) * itemsPerPage < filteredData.length) {
                     loadMoreData();
                 } else if ((currentPage - 1) * itemsPerPage >= filteredData.length) {
-                    $('#noMoreResults').text('NO MORE RESULTS FOUND');
+                    $('#noMoreResults').text('NO MORE ITEMS TO DISPLAY!');
                 }
             }
         });
     });
 
     function fetchData() {
-        $.getJSON('TopAllLessonNotes.json', function(data) {
+        $.getJSON('data.json', function(data) {
             allData = data;
             filteredData = data; // Initially, filtered data is the same as all data
             renderData();
@@ -585,7 +585,15 @@
         const currentData = filteredData.slice(startIndex, endIndex);
 
         if (currentData.length === 0 && currentPage === 1) {
-            $('#cardsContainer').html('<p class="col-12 text-center">NO RESULTS FOUND</p>');
+            if (!$('#cardsContainer').html().includes('No matching results found!')) {
+                $('#cardsContainer').html(`
+                    <div class="col-12 text-center">
+                        <p>No matching results found! Try again using another keyword...</p>
+                        <img src="097297f8e21d501ba45d7ce437ed77bd (1).gif" alt="No results found" style="max-width: 200px; margin-bottom: 20px;">
+
+                    </div>
+                `);
+            }
         } else {
             currentData.forEach((item, index) => {
                 const pdfId = "read" + (startIndex + index + 1);
@@ -644,7 +652,7 @@
             });
 
             if (currentData.length < itemsPerPage && currentPage === 1) {
-                $('#noMoreResults').text('NO MORE RESULTS FOUND');
+                $('#noMoreResults').text('Loading more items...');
             }
         }
     }
