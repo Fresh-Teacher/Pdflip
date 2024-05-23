@@ -1,3 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Google Tag Scripts -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SS26CRENX2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-SS26CRENX2');
+    </script>
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KGD6TVT');
+    </script>
+    <!-- End Google Tag Scripts -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGD6TVT" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <!-- Meta Tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="Welcome To Fresh Teacher's Library, one stop center for academic needs of Ugandan schools. Our core mandate is to apply creativity and come up with innovative solutions in Ugandas' education sector."/>
+    <meta name="keywords" content="Fresh Teacher's Library, www.freshteacheruganda.com, Schemes Of Work, Lesson Plans, Lesson Notes, Topical Questions, Luganda Translated Movies, Past Papers"/>
+    <meta name="author" content="Fresh Teacher"/>
+    <meta property="og:site_name" content="Fresh Teacher's Library"/>
+    <meta property="og:image" content="https://2.bp.blogspot.com/-IEabwvLwNVY/XnccoVSvUgI/AAAAAAAAFro/mQPkBepUZpcNo1WG8trICTTg7unzwwXSgCK4BGAYYCw/s1600/SquareFit_20200322_064134.jpg"/>
+    
+    <title>Baby All Lesson Notes</title>
     <style>
 
         .card {
@@ -452,3 +491,168 @@
     
     
       </style>
+    <!-- Favicon -->
+    <link rel="icon" href="logo.jpg" sizes="16x16" type="image/png"/>
+    <link rel="manifest" href="/manifest.json"/>
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/flipbook.style.css" type="text/css"/>
+    <link rel="stylesheet" href="css/font-awesome.css" type="text/css"/>
+    <link rel="stylesheet" href="css/footer.css" type="text/css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <a class="navbar-brand" href="index.html">
+            <div class="navbar-brand-content">
+                <a href="index.html">
+                    <button class="btn btn-danger animated-btn"><strong>↩ RETURN TO LIBRARY 📚</strong></button>
+                </a>
+            </div>
+        </a>
+    </nav>
+    <br/><br/>
+
+    <!-- Main Content -->
+    <div class="container">
+        <input type="text" class="form-control mb-4" id="searchInput" placeholder="🔍 Search for content here..."/>
+        <div class="row" id="cardsContainer"></div>
+        <div class="spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <p class="text-center" id="noMoreResults"></p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script src="js/flipbook.min.js"></script>
+
+    <script>
+        const itemsPerPage = 12;
+        let currentPage = 1;
+        let allData = [];
+        let filteredData = [];
+        let isLoading = false;
+        let debounceTimeout = null;
+
+        $(document).ready(function() {
+            fetchData();
+
+            $('#searchInput').on('input', function() {
+                const query = $(this).val().toLowerCase();
+                debounceFilterData(query);
+            });
+
+            $(window).scroll(function() {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+                    if (!isLoading && (currentPage - 1) * itemsPerPage < filteredData.length) {
+                        loadMoreData();
+                    } else if ((currentPage - 1) * itemsPerPage >= filteredData.length) {
+                        $('#noMoreResults').text('NO MORE RESULTS FOUND');
+                    }
+                }
+            });
+        });
+
+        function fetchData() {
+            $.getJSON('data.json', function(data) {
+                allData = data;
+                filteredData = data;
+                renderData();
+            });
+        }
+
+        function renderData() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = currentPage * itemsPerPage;
+            const currentData = filteredData.slice(startIndex, endIndex);
+
+            if (currentData.length === 0 && currentPage === 1) {
+                $('#cardsContainer').html('<p class="col-12 text-center">NO RESULTS FOUND</p>');
+            } else {
+                currentData.forEach((item, index) => {
+                    const pdfId = "read" + (startIndex + index + 1);
+                    const pdfUrl = item.pdfUrl;
+                    const fileName = pdfUrl.substring(pdfUrl.lastIndexOf("/") + 1).replace(".pdf", "");
+                    const title = fileName.toUpperCase();
+                    const description = item.description;
+
+                    $('#cardsContainer').append(`
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3>${title}</h3>
+                                    <p class="description">${description}</p>
+                                    <p>Price: <span class="price"><del>${item.price}</del></span> <span class="free-text">FREE</span></p>
+                                    <div class="button">
+                                        <a id="${pdfId}" class="btn btn-primary mt-2 mr-2 text-white">View File <i class="fas fa-book-reader fa-lg"></i></a>
+                                        <a href="${pdfUrl}" class="btn btn-info mt-2 text-white" download>Download File <i class="fas fa-download fa-lg"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+
+                    $("#" + pdfId).flipBook({
+                        pdfUrl: item.pdfUrl,
+                        lightBox: true,
+                        layout: 3,
+                        currentPage: { vAlign: "bottom", hAlign: "left" },
+                        btnShare: { enabled: false },
+                        btnPrint: { enabled: true },
+                        btnDownloadPages: { enabled: true },
+                        btnColor: 'rgb(255,120,60)',
+                        sideBtnColor: 'rgb(255,120,60)',
+                        sideBtnSize: 60,
+                        sideBtnBackground: "rgba(0,0,0,.7)",
+                        sideBtnRadius: 60,
+                        btnSound: { vAlign: "top", hAlign: "left" },
+                        btnAutoplay: { vAlign: "top", hAlign: "left" },
+                    });
+                });
+
+                if (currentData.length < itemsPerPage && currentPage === 1) {
+                    $('#noMoreResults').text('NO MORE RESULTS FOUND');
+                }
+            }
+        }
+
+        function loadMoreData() {
+            if (isLoading) return;
+            isLoading = true;
+            $('.spinner').show();
+            setTimeout(() => {
+                currentPage++;
+                renderData();
+                isLoading = false;
+                $('.spinner').hide();
+            }, 1000);
+        }
+
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function filterData(query) {
+            filteredData = allData.filter(item =>
+                item.title.toLowerCase().includes(query) ||
+                item.description.toLowerCase().includes(query)
+            );
+            currentPage = 1;
+            $('#cardsContainer').empty();
+            $('#noMoreResults').text('');
+            renderData();
+        }
+
+        const debounceFilterData = debounce(filterData, 300);
+    </script>
+</body>
+</html>
